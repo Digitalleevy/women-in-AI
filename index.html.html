@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Morning, Community! ☀️</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sun: #FFB830;
+    --orange: #FF6B35;
+    --rose: #FF4D6D;
+    --cream: #FFF8EF;
+    --warm-white: #FFFDF9;
+    --brown: #2D1B00;
+    --muted: #7A5C3A;
+    --card: #FFFFFF;
+    --shadow: rgba(255, 107, 53, 0.15);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,184,48,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255,107,53,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 0% 80%, rgba(255,77,109,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF4D6D 50%, #FFB830 100%);
+    border-radius: 28px;
+    padding: 52px 40px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(255,107,53,0.35), 0 4px 16px rgba(255,77,109,0.2);
+    margin-bottom: 32px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.04) 40px,
+      rgba(255,255,255,0.04) 80px
+    );
+  }
+
+  .sun-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 12px;
+    animation: spin-slow 20s linear infinite;
+    filter: drop-shadow(0 4px 16px rgba(255,184,48,0.6));
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 12px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 7vw, 58px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #FFE8A0;
+  }
+
+  .hero-quote {
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.92);
+    max-width: 480px;
+    margin: 0 auto 28px;
+    font-weight: 300;
+  }
+
+  .hero-quote strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+
+  .hero-cta:hover { background: rgba(255,255,255,0.35); transform: translateY(-2px); }
+
+  /* ── AFFIRMATIONS TICKER ── */
+  .ticker-wrap {
+    background: var(--brown);
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 14px 0;
+    margin-bottom: 32px;
+    position: relative;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+
+  .ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 28s linear infinite;
+  }
+
+  .ticker-item {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--sun);
+    padding: 0 40px;
+    letter-spacing: 0.5px;
+  }
+
+  .ticker-item span { color: rgba(255,255,255,0.4); margin: 0 8px; }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,107,53,0.3), transparent);
+  }
+
+  /* ── INTENTION CARD ── */
+  .intention-card {
+    background: var(--card);
+    border-radius: 22px;
+    padding: 32px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(255,107,53,0.1);
+    box-shadow: 0 4px 24px var(--shadow);
+    animation: fadeUp 0.7s 0.25s ease both;
+  }
+
+  .intention-card h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .intention-card p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #F0E8DF;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .checklist li:hover { border-color: var(--orange); background: rgba(255,107,53,0.04); }
+  .checklist li.done { text-decoration: line-through; color: var(--muted); background: rgba(255,184,48,0.08); border-color: var(--sun); }
+
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid #D0C4B8;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+
+  .done .check-box {
+    background: var(--sun);
+    border-color: var(--sun);
+  }
+
+  /* ── GAMES GRID ── */
+  .games-section { animation: fadeUp 0.7s 0.35s ease both; margin-bottom: 32px; }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .game-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 24px 20px;
+    border: 1.5px solid rgba(255,107,53,0.1);
+    box-shadow: 0 4px 20px var(--shadow);
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .game-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    opacity: 0.1;
+    transition: transform 0.3s;
+  }
+
+  .game-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); border-color: var(--orange); }
+  .game-card:hover::before { transform: scale(1.5); }
+
+  .game-card.g1::before { background: #FF6B35; }
+  .game-card.g2::before { background: #FF4D6D; }
+  .game-card.g3::before { background: #FFB830; }
+  .game-card.g4::before { background: #4ECDC4; }
+  .game-card.g5::before { background: #A78BFA; }
+  .game-card.g6::before { background: #34D399; }
+
+  .game-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+  .game-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .game-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+  .game-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(255,107,53,0.1);
+    color: var(--orange);
+  }
+
+  /* ── INTERACTIVE GAMES ── */
+  .game-modal {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(45,27,0,0.6);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .game-modal.open { display: flex; animation: fadeIn 0.2s ease; }
+
+  .modal-box {
+    background: var(--warm-white);
+    border-radius: 28px;
+    padding: 36px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 32px 80px rgba(45,27,0,0.3);
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #E8DDD5;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    color: var(--muted);
+  }
+
+  .modal-close:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .modal-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  /* Word of the Day */
+  .word-box {
+    background: linear-gradient(135deg, #FF6B35, #FF4D6D);
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .word-box .the-word {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .word-box .pronunciation { font-size: 14px; opacity: 0.7; margin-bottom: 12px; }
+  .word-box .definition { font-size: 15px; line-height: 1.6; opacity: 0.9; }
+
+  /* Trivia */
+  .trivia-q { font-size: 17px; font-weight: 600; margin-bottom: 18px; line-height: 1.5; }
+
+  .trivia-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+  .trivia-opt {
+    padding: 13px 18px;
+    border-radius: 12px;
+    border: 2px solid #EDE4DB;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    color: var(--brown);
+  }
+
+  .trivia-opt:hover { border-color: var(--orange); background: rgba(255,107,53,0.05); }
+  .trivia-opt.correct { border-color: #34D399; background: rgba(52,211,153,0.1); color: #065f46; }
+  .trivia-opt.wrong { border-color: var(--rose); background: rgba(255,77,109,0.08); color: #9f1239; }
+
+  .trivia-result { font-size: 15px; font-weight: 600; text-align: center; padding: 14px; border-radius: 12px; }
+  .trivia-result.win { background: rgba(52,211,153,0.15); color: #065f46; }
+  .trivia-result.lose { background: rgba(255,77,109,0.1); color: #9f1239; }
+
+  /* Emoji Story */
+  .emoji-story-display {
+    font-size: 40px;
+    letter-spacing: 6px;
+    text-align: center;
+    padding: 24px;
+    background: #FFF3E8;
+    border-radius: 16px;
+    margin-bottom: 18px;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #EDE4DB;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    resize: none;
+    color: var(--brown);
+    background: var(--warm-white);
+    outline: none;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus { border-color: var(--orange); }
+
+  /* Spin Wheel */
+  .wheel-wrap { text-align: center; margin-bottom: 20px; }
+
+  canvas#wheel { border-radius: 50%; box-shadow: 0 8px 32px rgba(255,107,53,0.25); }
+
+  .spin-btn, .btn-primary {
+    background: linear-gradient(135deg, #FF6B35, #FF4D6D);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .spin-btn:hover, .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
+  .spin-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .spin-result {
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--orange);
+    min-height: 28px;
+    font-family: 'Fraunces', serif;
+  }
+
+  /* Would You Rather */
+  .wyr-container { display: flex; gap: 14px; flex-direction: column; }
+
+  .wyr-opt {
+    flex: 1;
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px solid #EDE4DB;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.4;
+    transition: all 0.25s;
+    color: var(--brown);
+  }
+
+  .wyr-opt:hover { border-color: var(--orange); background: rgba(255,107,53,0.05); transform: scale(1.02); }
+  .wyr-opt.selected-a { border-color: #FF6B35; background: rgba(255,107,53,0.1); color: #FF6B35; }
+  .wyr-opt.selected-b { border-color: #FF4D6D; background: rgba(255,77,109,0.08); color: #FF4D6D; }
+
+  .wyr-divider { text-align: center; font-weight: 700; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+
+  .wyr-stats { margin-top: 16px; display: none; }
+  .wyr-stats.visible { display: block; }
+  .stat-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+  .bar-fill { height: 10px; border-radius: 20px; transition: width 0.6s ease; }
+  .bar-a { background: linear-gradient(90deg, #FF6B35, #FF4D6D); }
+  .bar-b { background: linear-gradient(90deg, #A78BFA, #60A5FA); }
+  .bar-wrap { flex: 1; background: #F0E8DF; border-radius: 20px; overflow: hidden; height: 10px; }
+
+  /* Gratitude */
+  .gratitude-prompts { display: flex; flex-direction: column; gap: 12px; }
+
+  .gratitude-item { display: flex; align-items: flex-start; gap: 12px; }
+  .g-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B35, #FFB830);
+    color: #fff; font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 4px;
+  }
+
+  .g-input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #EDE4DB;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--brown);
+    background: var(--warm-white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .g-input:focus { border-color: var(--orange); }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    padding-top: 20px;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+
+  .footer strong { color: var(--orange); }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    .hero { padding: 36px 24px 32px; }
+    .modal-box { padding: 28px 22px; }
+    .games-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="sun-icon">☀️</span>
+    <div class="hero-date" id="dateDisplay"></div>
+    <h1>Rise &amp; <em>Shine,</em><br>Community!</h1>
+    <p class="hero-quote">
+      Today is a <strong>brand new chance</strong> to grow, connect, and show up as your best self. Let's make this morning count together. 🔥
+    </p>
+    <a class="hero-cta" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">Play Today's Games ↓</a>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker">
+      <span class="ticker-item">✨ You belong here <span>•</span></span>
+      <span class="ticker-item">🌱 Growth happens daily <span>•</span></span>
+      <span class="ticker-item">💪 Progress over perfection <span>•</span></span>
+      <span class="ticker-item">🤝 We rise together <span>•</span></span>
+      <span class="ticker-item">🔥 Your energy matters <span>•</span></span>
+      <span class="ticker-item">🌟 Show up as YOU <span>•</span></span>
+      <span class="ticker-item">☀️ Good morning, champion <span>•</span></span>
+      <span class="ticker-item">✨ You belong here <span>•</span></span>
+      <span class="ticker-item">🌱 Growth happens daily <span>•</span></span>
+      <span class="ticker-item">💪 Progress over perfection <span>•</span></span>
+      <span class="ticker-item">🤝 We rise together <span>•</span></span>
+      <span class="ticker-item">🔥 Your energy matters <span>•</span></span>
+      <span class="ticker-item">🌟 Show up as YOU <span>•</span></span>
+      <span class="ticker-item">☀️ Good morning, champion <span>•</span></span>
+    </div>
+  </div>
+
+  <!-- MORNING CHECKLIST -->
+  <div class="intention-card">
+    <div class="section-label">🌅 Morning Ritual</div>
+    <h2>Set Your Intention for Today</h2>
+    <p>Check off your morning wins — even small ones build momentum. Tap each one as you complete it!</p>
+    <ul class="checklist" id="checklist">
+      <li onclick="toggleCheck(this)"><span class="check-box">✓</span> Drink a glass of water 💧</li>
+      <li onclick="toggleCheck(this)"><span class="check-box">✓</span> Take 5 deep breaths 🧘</li>
+      <li onclick="toggleCheck(this)"><span class="check-box">✓</span> Write one thing you're grateful for ✍️</li>
+      <li onclick="toggleCheck(this)"><span class="check-box">✓</span> Set your #1 goal for today 🎯</li>
+      <li onclick="toggleCheck(this)"><span class="check-box">✓</span> Say good morning to someone 👋</li>
+    </ul>
+  </div>
+
+  <!-- GAMES -->
+  <div class="games-section" id="games">
+    <div class="section-label">🎮 Community Games</div>
+    <div class="games-grid">
+
+      <div class="game-card g1" onclick="openGame('trivia')">
+        <span class="game-icon">🧠</span>
+        <div class="game-title">Trivia Time</div>
+        <div class="game-desc">Test your knowledge with today's community trivia question!</div>
+        <span class="game-tag">Brain Power</span>
+      </div>
+
+      <div class="game-card g2" onclick="openGame('wyr')">
+        <span class="game-icon">🤔</span>
+        <div class="game-title">Would You Rather</div>
+        <div class="game-desc">Fun dilemmas to spark conversations in the community.</div>
+        <span class="game-tag">Social</span>
+      </div>
+
+      <div class="game-card g3" onclick="openGame('wheel')">
+        <span class="game-icon">🎡</span>
+        <div class="game-title">Spin the Wheel</div>
+        <div class="game-desc">Spin for your daily challenge or affirmation!</div>
+        <span class="game-tag">Lucky Spin</span>
+      </div>
+
+      <div class="game-card g4" onclick="openGame('emoji')">
+        <span class="game-icon">🧩</span>
+        <div class="game-title">Emoji Story</div>
+        <div class="game-desc">Guess the hidden message in today's emoji puzzle!</div>
+        <span class="game-tag">Creative</span>
+      </div>
+
+      <div class="game-card g5" onclick="openGame('word')">
+        <span class="game-icon">📖</span>
+        <div class="game-title">Word of the Day</div>
+        <div class="game-desc">Expand your vocabulary with today's power word.</div>
+        <span class="game-tag">Learning</span>
+      </div>
+
+      <div class="game-card g6" onclick="openGame('gratitude')">
+        <span class="game-icon">🙏</span>
+        <div class="game-title">Gratitude Round</div>
+        <div class="game-desc">Share 3 things you're grateful for this morning.</div>
+        <span class="game-tag">Mindfulness</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Powered by your community ❤️ &nbsp;|&nbsp; <strong>Make today amazing!</strong>
+  </div>
+</div>
+
+<!-- ══════════════ MODALS ══════════════ -->
+
+<!-- TRIVIA -->
+<div class="game-modal" id="modal-trivia">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <div class="modal-title">🧠 Morning Trivia</div>
+    <div class="modal-sub">One question. Can you get it right?</div>
+    <div id="trivia-body"></div>
+  </div>
+</div>
+
+<!-- WOULD YOU RATHER -->
+<div class="game-modal" id="modal-wyr">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <div class="modal-title">🤔 Would You Rather?</div>
+    <div class="modal-sub">Pick one — no explanations needed! (results reveal after you choose)</div>
+    <div id="wyr-body"></div>
+  </div>
+</div>
+
+<!-- SPIN WHEEL -->
+<div class="game-modal" id="modal-wheel">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <div class="modal-title">🎡 Spin the Wheel</div>
+    <div class="modal-sub">Your daily challenge awaits. Spin and commit!</div>
+    <div class="wheel-wrap">
+      <canvas id="wheel" width="280" height="280"></canvas>
+      <div class="spin-result" id="spin-result"></div>
+    </div>
+    <div style="text-align:center">
+      <button class="spin-btn" id="spin-btn" onclick="spinWheel()">🎡 Spin!</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMOJI STORY -->
+<div class="game-modal" id="modal-emoji">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <div class="modal-title">🧩 Emoji Story</div>
+    <div class="modal-sub">Decode the emoji sequence — what does it mean?</div>
+    <div id="emoji-body"></div>
+  </div>
+</div>
+
+<!-- WORD OF DAY -->
+<div class="game-modal" id="modal-word">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <div class="modal-title">📖 Word of the Day</div>
+    <div class="modal-sub">Add this to your vocabulary arsenal!</div>
+    <div id="word-body"></div>
+  </div>
+</div>
+
+<!-- GRATITUDE -->
+<div class="game-modal" id="modal-gratitude">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGame()">✕</button>
+    <div class="modal-title">🙏 Gratitude Round</div>
+    <div class="modal-sub">Name 3 things you're grateful for right now, no matter how small.</div>
+    <div id="gratitude-body"></div>
+  </div>
+</div>
+
+<script>
+// ── DATE ──
+const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const now = new Date();
+document.getElementById('dateDisplay').textContent =
+  `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+// ── CHECKLIST ──
+function toggleCheck(el) {
+  el.classList.toggle('done');
+}
+
+// ── MODAL CONTROLS ──
+function openGame(game) {
+  closeGame();
+  document.getElementById('modal-' + game).classList.add('open');
+  if (game === 'trivia') buildTrivia();
+  if (game === 'wyr') buildWYR();
+  if (game === 'wheel') buildWheel();
+  if (game === 'emoji') buildEmoji();
+  if (game === 'word') buildWord();
+  if (game === 'gratitude') buildGratitude();
+}
+
+function closeGame() {
+  document.querySelectorAll('.game-modal').forEach(m => m.classList.remove('open'));
+}
+
+document.querySelectorAll('.game-modal').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeGame(); });
+});
+
+// ── TRIVIA ──
+const triviaBank = [
+  { q: "What's the most spoken language in the world by native speakers?", options: ["English","Mandarin Chinese","Spanish","Hindi"], ans: 1 },
+  { q: "How many sides does a hexagon have?", options: ["5","6","7","8"], ans: 1 },
+  { q: "Which planet is known as the Red Planet?", options: ["Venus","Jupiter","Mars","Saturn"], ans: 2 },
+  { q: "What is the powerhouse of the cell?", options: ["Nucleus","Mitochondria","Ribosome","Golgi body"], ans: 1 },
+  { q: "In what year did the first iPhone launch?", options: ["2005","2006","2007","2008"], ans: 2 },
+];
+
+function buildTrivia() {
+  const t = triviaBank[Math.floor(Math.random() * triviaBank.length)];
+  let html = `<div class="trivia-q">${t.q}</div><div class="trivia-options">`;
+  t.options.forEach((o, i) => {
+    html += `<button class="trivia-opt" onclick="checkTrivia(this,${i},${t.ans})">${o}</button>`;
+  });
+  html += `</div><div class="trivia-result" id="trivia-res"></div>`;
+  document.getElementById('trivia-body').innerHTML = html;
+}
+
+function checkTrivia(el, chosen, correct) {
+  document.querySelectorAll('.trivia-opt').forEach(b => b.disabled = true);
+  const opts = document.querySelectorAll('.trivia-opt');
+  opts[correct].classList.add('correct');
+  if (chosen !== correct) el.classList.add('wrong');
+  const res = document.getElementById('trivia-res');
+  res.textContent = chosen === correct ? '🎉 Correct! You nailed it!' : '😅 Not quite — but now you know!';
+  res.className = 'trivia-result ' + (chosen === correct ? 'win' : 'lose');
+}
+
+// ── WOULD YOU RATHER ──
+const wyrBank = [
+  { a: "☕ Coffee for life — but it always goes cold", b: "🍵 Tea forever — but always perfectly warm" },
+  { a: "🌅 Wake up at 5am every day full of energy", b: "🌙 Stay up until 2am always feeling creative" },
+  { a: "🧠 Know all the answers but can't explain them", b: "📢 Explain everything perfectly but be wrong 20% of the time" },
+  { a: "🌍 Travel the world solo for a year", b: "🏡 Have a dream home but never leave your city" },
+  { a: "🎵 Always have the perfect playlist for every moment", b: "📸 Every photo you take comes out perfectly" },
+];
+
+let wyrChosen = false;
+let wyrVotes = { a: 0, b: 0 };
+
+function buildWYR() {
+  const w = wyrBank[Math.floor(Math.random() * wyrBank.length)];
+  wyrChosen = false;
+  wyrVotes = { a: Math.floor(Math.random()*40)+20, b: Math.floor(Math.random()*40)+20 };
+  document.getElementById('wyr-body').innerHTML = `
+    <div class="wyr-container">
+      <button class="wyr-opt" id="wyr-a" onclick="pickWYR('a',${wyrVotes.a},${wyrVotes.b})">${w.a}</button>
+      <div class="wyr-divider">— OR —</div>
+      <button class="wyr-opt" id="wyr-b" onclick="pickWYR('b',${wyrVotes.a},${wyrVotes.b})">${w.b}</button>
+    </div>
+    <div class="wyr-stats" id="wyr-stats">
+      <div class="stat-bar" style="margin-top:16px">
+        <span style="font-size:20px">A</span>
+        <div class="bar-wrap"><div class="bar-fill bar-a" id="bar-a" style="width:0%"></div></div>
+        <span id="pct-a">0%</span>
+      </div>
+      <div class="stat-bar">
+        <span style="font-size:20px">B</span>
+        <div class="bar-wrap"><div class="bar-fill bar-b" id="bar-b" style="width:0%"></div></div>
+        <span id="pct-b">0%</span>
+      </div>
+    </div>`;
+}
+
+function pickWYR(choice, va, vb) {
+  if (wyrChosen) return;
+  wyrChosen = true;
+  if (choice === 'a') va++; else vb++;
+  const total = va + vb;
+  const pctA = Math.round(va/total*100);
+  const pctB = 100 - pctA;
+  document.getElementById('wyr-a').classList.add(choice === 'a' ? 'selected-a' : '');
+  document.getElementById('wyr-b').classList.add(choice === 'b' ? 'selected-b' : '');
+  document.getElementById('wyr-a').disabled = true;
+  document.getElementById('wyr-b').disabled = true;
+  const stats = document.getElementById('wyr-stats');
+  stats.classList.add('visible');
+  setTimeout(() => {
+    document.getElementById('bar-a').style.width = pctA + '%';
+    document.getElementById('bar-b').style.width = pctB + '%';
+    document.getElementById('pct-a').textContent = pctA + '%';
+    document.getElementById('pct-b').textContent = pctB + '%';
+  }, 100);
+}
+
+// ── SPIN WHEEL ──
+const wheelItems = [
+  { label: "Send a compliment", color: "#FF6B35" },
+  { label: "1-min stretch", color: "#FF4D6D" },
+  { label: "Share your goal", color: "#FFB830" },
+  { label: "Drink water now!", color: "#4ECDC4" },
+  { label: "Power pose 30s", color: "#A78BFA" },
+  { label: "Deep breath x5", color: "#34D399" },
+  { label: "Write a win 🏆", color: "#F59E0B" },
+  { label: "Dance break! 💃", color: "#F97316" },
+];
+
+let spinning = false;
+let currentAngle = 0;
+
+function buildWheel() {
+  setTimeout(() => drawWheel(0), 100);
+  document.getElementById('spin-result').textContent = '';
+}
+
+function drawWheel(rotation) {
+  const canvas = document.getElementById('wheel');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 140, cy = 140, r = 130;
+  const sliceAngle = (2 * Math.PI) / wheelItems.length;
+  ctx.clearRect(0, 0, 280, 280);
+
+  wheelItems.forEach((item, i) => {
+    const start = rotation + i * sliceAngle;
+    const end = start + sliceAngle;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.closePath();
+    ctx.fillStyle = item.color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(start + sliceAngle / 2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px DM Sans, sans-serif';
+    const words = item.label.split(' ');
+    if (words.length <= 2) {
+      ctx.fillText(item.label, r - 10, 4);
+    } else {
+      ctx.fillText(words.slice(0,2).join(' '), r - 10, -3);
+      ctx.fillText(words.slice(2).join(' '), r - 10, 11);
+    }
+    ctx.restore();
+  });
+
+  // Center
+  ctx.beginPath();
+  ctx.arc(cx, cy, 20, 0, 2 * Math.PI);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  ctx.strokeStyle = '#FF6B35';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Pointer
+  ctx.beginPath();
+  ctx.moveTo(cx + r + 12, cy);
+  ctx.lineTo(cx + r - 8, cy - 10);
+  ctx.lineTo(cx + r - 8, cy + 10);
+  ctx.closePath();
+  ctx.fillStyle = '#2D1B00';
+  ctx.fill();
+}
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('spin-btn').disabled = true;
+  document.getElementById('spin-result').textContent = '';
+
+  const extra = Math.random() * 360 + 1440;
+  const totalAngle = (extra * Math.PI) / 180;
+  const duration = 3500;
+  const start = performance.now();
+  const startAngle = currentAngle;
+
+  function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; }
+
+  function frame(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    currentAngle = startAngle + totalAngle * ease(progress);
+    drawWheel(currentAngle);
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      spinning = false;
+      document.getElementById('spin-btn').disabled = false;
+      const sliceAngle = (2 * Math.PI) / wheelItems.length;
+      const normalised = ((currentAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      const idx = Math.floor(((2 * Math.PI - normalised) / sliceAngle)) % wheelItems.length;
+      document.getElementById('spin-result').textContent = '🎯 ' + wheelItems[idx].label + '!';
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+// ── EMOJI STORY ──
+const emojiPuzzles = [
+  { emojis: "☀️ + 🏃 + 💪 + 🌟", answer: "Start your morning with exercise and shine!" },
+  { emojis: "🌱 + 💧 + ☀️ + 🌸", answer: "Growth needs care, nourishment, and time!" },
+  { emojis: "🤝 + ❤️ + 🏘️ = 🔥", answer: "Together our community is unstoppable!" },
+  { emojis: "🧠 + 📚 + ⏰ + 🎯", answer: "Daily learning leads to achieving your goals!" },
+  { emojis: "😴 + ➡️ + ☀️ + 😊", answer: "Wake up and choose to be happy today!" },
+];
+
+let emojiRevealed = false;
+
+function buildEmoji() {
+  const p = emojiPuzzles[Math.floor(Math.random() * emojiPuzzles.length)];
+  emojiRevealed = false;
+  document.getElementById('emoji-body').innerHTML = `
+    <div class="emoji-story-display">${p.emojis}</div>
+    <textarea id="emoji-ans" placeholder="What do you think this means? Write your interpretation..." rows="3"></textarea>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="revealEmoji('${p.answer.replace(/'/g,"\\'")}')">Reveal Answer 🔍</button>
+    </div>
+    <div id="emoji-reveal" style="margin-top:16px;font-weight:600;color:var(--orange);font-size:16px;min-height:24px"></div>
+  `;
+}
+
+function revealEmoji(answer) {
+  document.getElementById('emoji-reveal').textContent = '💡 ' + answer;
+}
+
+// ── WORD OF DAY ──
+const words = [
+  { word: "Luminous", pron: "/ˈluːmɪnəs/", def: "Full of or shedding light; bright or shining — like the energy you bring every day.", use: '"Her smile was luminous, lighting up every room she entered."' },
+  { word: "Tenacious", pron: "/tɪˈneɪʃəs/", def: "Tending to keep a firm hold; persistent and determined in pursuing goals.", use: '"The team\'s tenacious spirit led them to victory despite all odds."' },
+  { word: "Effulgent", pron: "/ɪˈfʌldʒ(ə)nt/", def: "Radiant; shining brilliantly — perfect for describing today\'s potential.", use: '"The effulgent sunrise reminded her that every morning is a fresh start."' },
+  { word: "Propitious", pron: "/prəˈpɪʃəs/", def: "Giving or indicating a good chance of success; favorably hopeful.", use: '"This is a propitious moment to take that bold step forward."' },
+  { word: "Resolute", pron: "/ˈrɛzəluːt/", def: "Admirably purposeful, determined, and unwavering in one\'s goals.", use: '"Be resolute in your intentions, and results will follow."' },
+];
+
+function buildWord() {
+  const w = words[Math.floor(Math.random() * words.length)];
+  document.getElementById('word-body').innerHTML = `
+    <div class="word-box">
+      <span class="the-word">${w.word}</span>
+      <div class="pronunciation">${w.pron}</div>
+      <div class="definition">${w.def}</div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.6"><em>📝 Used in a sentence:</em><br><br>${w.use}</p>
+    <br>
+    <p style="font-size:14px;color:var(--muted)">💬 <strong>Share it!</strong> Use this word in a sentence in the community chat today!</p>
+  `;
+}
+
+// ── GRATITUDE ──
+function buildGratitude() {
+  const prompts = ["Something in your life that keeps you going...", "A person who made you smile recently...", "A small moment from today you're already thankful for..."];
+  let html = '<div class="gratitude-prompts">';
+  prompts.forEach((p, i) => {
+    html += `
+      <div class="gratitude-item">
+        <div class="g-num">${i+1}</div>
+        <input class="g-input" type="text" placeholder="${p}" />
+      </div>`;
+  });
+  html += `</div><br>
+    <button class="btn-primary" onclick="submitGratitude()">🙏 I'm grateful!</button>
+    <div id="grat-msg" style="margin-top:16px;font-size:15px;font-weight:600;color:var(--orange);min-height:24px"></div>`;
+  document.getElementById('gratitude-body').innerHTML = html;
+}
+
+function submitGratitude() {
+  const inputs = document.querySelectorAll('.g-input');
+  const filled = [...inputs].filter(i => i.value.trim());
+  if (filled.length < 1) {
+    document.getElementById('grat-msg').textContent = '✍️ Write at least one thing to continue!';
+    return;
+  }
+  const msgs = ['🌟 Beautiful! Gratitude is your superpower.', '❤️ That\'s the spirit! Keep shining.', '🔥 Amazing! You\'re already winning today.'];
+  document.getElementById('grat-msg').textContent = msgs[Math.floor(Math.random()*msgs.length)];
+}
+</script>
+</body>
+</html>
