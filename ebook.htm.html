@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Step by Step Guide to Build Your AI Apps</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink: #F472B6;
+    --hot-pink: #EC4899;
+    --deep-pink: #BE185D;
+    --blush: #FDE8F4;
+    --soft-pink: #FCE7F3;
+    --white: #FFFFFF;
+    --dark: #1a0a12;
+    --gold: #F4C842;
+  }
+
+  body {
+    background: #f8e8f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .flyer {
+    width: 420px;
+    background: linear-gradient(160deg, #fce8f5 0%, #fdf0f8 40%, #fff0f9 100%);
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 30px 80px rgba(190,24,93,0.25);
+  }
+
+  /* TOP HERO SECTION */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #1a0a12 0%, #3d0a24 50%, #2d0a1e 100%);
+    padding: 40px 30px 30px;
+    overflow: hidden;
+    min-height: 220px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,114,182,0.3) 0%, transparent 70%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,114,182,0.2) 0%, transparent 70%);
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .main-title {
+    position: relative;
+    z-index: 2;
+  }
+
+  .main-title .step {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    display: block;
+  }
+
+  .main-title .guide-line {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--pink);
+    display: block;
+    line-height: 1.1;
+    margin-top: 4px;
+  }
+
+  .main-title .to-build {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--white);
+    letter-spacing: 2px;
+    display: block;
+    line-height: 0.95;
+  }
+
+  .main-title .ai-apps {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    background: linear-gradient(135deg, #F472B6, #F4C842, #F472B6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 3px;
+    display: block;
+    line-height: 0.9;
+  }
+
+  .badge-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--hot-pink), var(--deep-pink));
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: 50px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* DECO LINE */
+  .deco-line {
+    height: 4px;
+    background: linear-gradient(90deg, var(--deep-pink), var(--pink), var(--gold), var(--pink), var(--deep-pink));
+  }
+
+  /* TAGLINE SECTION */
+  .tagline-section {
+    background: var(--white);
+    margin: 20px 20px;
+    border-radius: 16px;
+    padding: 18px 22px;
+    border: 1.5px solid rgba(244,114,182,0.3);
+    box-shadow: 0 4px 20px rgba(236,72,153,0.1);
+  }
+
+  .tagline-section p {
+    font-size: 13.5px;
+    color: #4a1530;
+    line-height: 1.65;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .tagline-section p strong {
+    color: var(--deep-pink);
+    font-weight: 600;
+  }
+
+  /* STEPS SECTION */
+  .steps-header {
+    text-align: center;
+    padding: 0 20px 4px;
+  }
+
+  .steps-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    letter-spacing: 3px;
+    color: var(--deep-pink);
+    text-shadow: 0 0 30px rgba(236,72,153,0.3);
+  }
+
+  .steps-grid {
+    padding: 10px 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(244,114,182,0.2);
+    box-shadow: 0 2px 12px rgba(236,72,153,0.07);
+    transition: transform 0.2s;
+  }
+
+  .step-number {
+    min-width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--hot-pink), var(--deep-pink));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: white;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(236,72,153,0.4);
+  }
+
+  .step-content h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d0a1e;
+    margin-bottom: 3px;
+    letter-spacing: 0.3px;
+  }
+
+  .step-content p {
+    font-size: 11.5px;
+    color: #7a4060;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* INCLUDES SECTION */
+  .includes-section {
+    margin: 18px 20px 0;
+    background: linear-gradient(135deg, #1a0a12, #3d0a24);
+    border-radius: 16px;
+    padding: 18px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .includes-section::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,114,182,0.3), transparent 70%);
+  }
+
+  .includes-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--pink);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .includes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .include-item {
+    text-align: center;
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 12px 8px;
+    border: 1px solid rgba(244,114,182,0.2);
+  }
+
+  .include-item .icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .include-item span {
+    font-size: 10px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    display: block;
+    text-transform: uppercase;
+  }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    margin: 18px 20px 22px;
+    text-align: center;
+  }
+
+  .cta-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--hot-pink), var(--gold), var(--hot-pink));
+    background-size: 200% 200%;
+    animation: shimmer 2.5s ease infinite;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    border-radius: 50px;
+    box-shadow: 0 6px 24px rgba(236,72,153,0.45);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(236,72,153,0.6);
+  }
+
+  .shop-link {
+    display: block;
+    font-size: 10px;
+    color: #BE185D;
+    margin-top: 6px;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    word-break: break-all;
+    opacity: 0.75;
+  }
+
+  .shop-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .cta-sub {
+    font-size: 11px;
+    color: #BE185D;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* FOOTER */
+  .footer {
+    background: linear-gradient(90deg, var(--deep-pink), var(--hot-pink));
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer span {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="flyer">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">✦ The Ultimate Ebook ✦</div>
+    <div class="main-title">
+      <span class="step">STEP BY STEP</span>
+      <span class="guide-line">guide to build your</span>
+      <span class="to-build"></span>
+      <span class="ai-apps">AI APPS</span>
+    </div>
+    <div class="badge-pill">💰 From Idea to Income 💸</div>
+  </div>
+
+  <div class="deco-line"></div>
+
+  <!-- TAGLINE -->
+  <div class="tagline-section">
+    <p>No tech degree needed. <strong>Just the right roadmap.</strong> Learn exactly how to build, brand & sell AI apps that work for you — <strong>24/7, on autopilot.</strong> 🤖✨</p>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-header">
+    <h2>WHAT'S INSIDE 👇</h2>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Choose Your Niche & App Idea</h3>
+        <p>Identify profitable AI app categories from beauty to business — and pick one that aligns with your brand.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Set Up Your AI Tools & Platform</h3>
+        <p>The exact tools, platforms & tech stack you need — no coding experience required to get started.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Build & Customize Your App</h3>
+        <p>Step-by-step walkthroughs to create, design and personalize your AI app with your branding.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Price, Package & Sell</h3>
+        <p>Learn how to price your app, create irresistible offers and start making sales immediately.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Market & Scale to 6 Figures</h3>
+        <p>Proven promo strategies to grow your audience, automate income & scale your AI app business.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCLUDES -->
+  <div class="includes-section">
+    <div class="includes-label">BONUSES INCLUDED 🎁</div>
+    <div class="includes-grid">
+      <div class="include-item">
+        <span class="icon">📋</span>
+        <span>400+ Ready-Made App Templates</span>
+      </div>
+      <div class="include-item">
+        <span class="icon">✍️</span>
+        <span>8,300 Done-For-You Prompts</span>
+      </div>
+      <div class="include-item">
+        <span class="icon">👑</span>
+        <span>Private Community Access</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="bottom-cta">
+    <a class="cta-pill" href="https://sideicomewealth.com/shop/f376fac2-1581-4a0d-85d6-abba04d724fd" target="_blank">✦ GET THE EBOOK NOW ✦</a>
+    <p class="cta-sub">Your blueprint to building & selling AI apps starts here 💅</p>
+    <a class="shop-link" href="https://sideicomewealth.com/shop/f376fac2-1581-4a0d-85d6-abba04d724fd" target="_blank">sideicomewealth.com/shop</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>✦ FREE PROMO INCLUDED ✦ DAILY PROMPTS ✦ REALISTIC AI APPS ✦</span>
+  </div>
+
+</div>
+</body>
+</html>
