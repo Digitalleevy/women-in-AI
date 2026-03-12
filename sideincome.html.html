@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Side Income Society — AI Income For Every Woman</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600;1,9..144,700&family=Nunito:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terracotta:#c4705a;
+  --terra-lt:#e09b87;
+  --terra-pale:#faf0ec;
+  --dusty-rose:#d4a5a5;
+  --blush:#fdf6f4;
+  --sage:#7a9e7e;
+  --sage-lt:#c8deca;
+  --sage-pale:#f0f7f0;
+  --cream:#faf7f2;
+  --warm-white:#fff9f6;
+  --ink:#2c1f1a;
+  --mid:#6b4f45;
+  --muted:#a08078;
+  --border:#ead8d2;
+  --gold:#c49a4a;
+  --white:#ffffff;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;overflow-x:hidden;line-height:1.6;cursor:none}
+
+/* CURSOR */
+#cur,#curRing{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);border-radius:50%}
+#cur{width:10px;height:10px;background:var(--terracotta);transition:width .2s,height .2s,opacity .2s}
+#curRing{width:38px;height:38px;border:1.5px solid var(--terracotta);opacity:.45;transition:all .15s ease}
+
+/* SCROLL PROGRESS */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--terracotta),var(--dusty-rose),var(--sage));z-index:1000;width:0;transition:width .1s}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.scrolled{background:rgba(250,247,242,.95);backdrop-filter:blur(18px);padding:14px 56px;border-bottom:1px solid var(--border);box-shadow:0 2px 20px rgba(196,112,90,.06)}
+.logo{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--ink)}
+.logo span{color:var(--terracotta);font-style:italic}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:.78rem;color:var(--muted);text-decoration:none;letter-spacing:.07em;text-transform:uppercase;font-weight:600;transition:color .2s}
+.nav-links a:hover{color:var(--terracotta)}
+.nav-cta{background:var(--terracotta);color:var(--white);padding:12px 28px;border-radius:50px;font-weight:700;font-size:.8rem;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .25s;box-shadow:0 6px 20px rgba(196,112,90,.3)}
+.nav-cta:hover{background:var(--terra-lt);transform:translateY(-1px);box-shadow:0 10px 28px rgba(196,112,90,.4)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:130px 56px 90px;gap:64px;position:relative;overflow:hidden;background:var(--blush)}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-circle{position:absolute;border-radius:50%;filter:blur(80px);opacity:.3}
+.hc1{width:600px;height:600px;background:var(--terracotta);top:-200px;right:-150px;animation:drift 9s ease-in-out infinite}
+.hc2{width:400px;height:400px;background:var(--sage-lt);bottom:-100px;left:-100px;animation:drift 11s ease-in-out infinite reverse}
+.hc3{width:300px;height:300px;background:var(--dusty-rose);top:40%;left:40%;animation:drift 7s ease-in-out infinite 2s}
+.hero-left{position:relative;z-index:2}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(196,112,90,.1);border:1px solid rgba(196,112,90,.25);padding:8px 18px;border-radius:50px;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--terracotta);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .8s .1s both}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--terracotta);animation:pulse 2s infinite}
+
+h1{font-family:'Fraunces',serif;font-size:clamp(3rem,5.5vw,6rem);font-weight:700;line-height:.95;letter-spacing:-.02em;animation:fadeUp .8s .2s both}
+h1 em{font-style:italic;color:var(--terracotta)}
+h1 .ghost{-webkit-text-stroke:1.5px var(--ink);color:transparent}
+.hero-body{font-size:1.05rem;color:var(--mid);line-height:1.85;margin-top:24px;max-width:480px;font-weight:300;animation:fadeUp .8s .35s both}
+.hero-actions{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;animation:fadeUp .8s .5s both}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--terracotta);color:var(--white);padding:16px 36px;font-weight:700;font-size:.95rem;text-decoration:none;border-radius:50px;letter-spacing:.03em;box-shadow:0 8px 28px rgba(196,112,90,.35);transition:all .25s}
+.btn-primary:hover{background:var(--terra-lt);transform:translateY(-2px);box-shadow:0 14px 36px rgba(196,112,90,.45)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;color:var(--mid);padding:16px 28px;font-weight:600;font-size:.9rem;text-decoration:none;border:1.5px solid var(--border);border-radius:50px;transition:all .2s}
+.btn-outline:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.social-proof{display:flex;align-items:center;gap:16px;margin-top:44px;animation:fadeUp .8s .65s both}
+.s-avs{display:flex}
+.s-av{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--blush);margin-left:-9px;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--white)}
+.s-av:first-child{margin-left:0}
+.sa1{background:#c4705a}.sa2{background:#c49a4a}.sa3{background:#7a9e7e}.sa4{background:#b87a6a}.sa5{background:#a08878}
+.s-text{font-size:.83rem;color:var(--muted)}
+.s-text strong{color:var(--ink);display:block;margin-bottom:2px}
+
+/* HERO RIGHT — stacked cards with parallax */
+.hero-right{position:relative;z-index:2;height:500px;animation:fadeUp .8s .3s both}
+.hcard{position:absolute;background:var(--white);border-radius:22px;padding:26px 30px;box-shadow:0 16px 50px rgba(44,31,26,.08);transition:transform .5s cubic-bezier(.34,1.56,.64,1);border:1px solid rgba(234,216,210,.5)}
+.hcard:hover{box-shadow:0 24px 60px rgba(44,31,26,.14)}
+.hc-main{width:300px;top:60px;left:20px;z-index:4;transform:rotate(-1.5deg)}
+.hc-b{width:240px;top:20px;right:10px;background:var(--terracotta);z-index:3;transform:rotate(2deg)}
+.hc-c{width:230px;bottom:30px;left:50px;background:var(--sage-pale);border:1.5px solid var(--sage-lt);z-index:3;transform:rotate(1deg)}
+.hc-d{width:200px;bottom:50px;right:20px;background:linear-gradient(135deg,#f5e6c8,#fdf6f4);z-index:2;transform:rotate(-2deg)}
+.hcard-tag{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;opacity:.6}
+.hcard-title{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;line-height:1.2;margin-bottom:8px}
+.hcard-body{font-size:.8rem;line-height:1.6;color:var(--muted)}
+.hc-b .hcard-tag{color:rgba(255,255,255,.6)}
+.hc-b .hcard-title{color:var(--white)}
+.hc-b .hcard-body{color:rgba(255,255,255,.75)}
+.hc-b-big{font-family:'Fraunces',serif;font-size:2.8rem;font-weight:700;color:var(--white);line-height:1}
+.hc-b-sub{font-size:.75rem;color:rgba(255,255,255,.7);margin-top:4px}
+.hc-c .hcard-tag{color:var(--sage)}
+.hc-c .hcard-title{color:var(--ink)}
+
+/* WAVE DIVIDER */
+.wave{overflow:hidden;line-height:0}
+.wave svg{display:block;width:100%}
+
+/* MARQUEE */
+.marquee-band{overflow:hidden;background:var(--terracotta);padding:12px 0}
+.marquee-inner{display:flex;white-space:nowrap;animation:marquee 24s linear infinite}
+.m-item{font-family:'DM Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.16em;text-transform:uppercase;padding:0 28px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.12)}
+.m-item.b{color:var(--white);font-weight:500}
+
+/* LAYOUT */
+.section{padding:100px 56px}
+.wrap{max-width:1100px;margin:0 auto}
+.wrap-sm{max-width:740px;margin:0 auto}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--terracotta);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+h2{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:700;line-height:1.08;letter-spacing:-.02em}
+h2 em{font-style:italic;color:var(--terracotta)}
+
+/* PROBLEM SECTION */
+.problem{background:var(--white)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:60px}
+.prob-list{display:flex;flex-direction:column}
+.prob-row{padding:22px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;cursor:default;transition:padding-left .3s}
+.prob-row:first-child{border-top:1px solid var(--border)}
+.prob-row:hover{padding-left:10px}
+.prob-emoji{font-size:1.4rem;flex-shrink:0;margin-top:2px}
+.prob-copy{font-size:.96rem;color:var(--mid);line-height:1.75}
+.prob-copy strong{color:var(--ink);font-weight:600}
+.pullquote{background:linear-gradient(135deg,var(--terra-pale),var(--blush));border-radius:22px;padding:44px 40px;position:relative;overflow:hidden}
+.pullquote::before{content:'\201C';position:absolute;top:-15px;left:16px;font-family:'Fraunces',serif;font-size:9rem;color:var(--terracotta);opacity:.12;line-height:1;pointer-events:none}
+.pq-body{font-family:'Fraunces',serif;font-size:1.2rem;font-style:italic;line-height:1.75;color:var(--ink);position:relative;z-index:1}
+.pq-source{margin-top:20px;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--terracotta);letter-spacing:.12em;text-transform:uppercase}
+
+/* FEAR SECTION — interactive expandable cards */
+.fears{background:var(--cream);text-align:center}
+.fears h2{margin-bottom:14px}
+.fears-sub{font-size:.97rem;color:var(--muted);max-width:500px;margin:0 auto 56px;line-height:1.85;font-weight:300}
+.fear-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left}
+.fcard{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:34px 28px;cursor:pointer;transition:all .35s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden}
+.fcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,112,90,.07),transparent);opacity:0;transition:opacity .3s}
+.fcard:hover{border-color:var(--terracotta);transform:translateY(-8px) scale(1.015);box-shadow:0 20px 50px rgba(196,112,90,.13)}
+.fcard:hover::before{opacity:1}
+.fcard.open{border-color:var(--terracotta);background:rgba(253,246,244,.6)}
+.f-emoji{font-size:2.2rem;margin-bottom:16px;display:block}
+.f-title{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:600;color:var(--ink);margin-bottom:10px}
+.f-teaser{font-size:.86rem;color:var(--muted);line-height:1.7}
+.f-expand{max-height:0;overflow:hidden;transition:max-height .45s ease,opacity .3s;opacity:0;font-size:.84rem;color:var(--terracotta);font-weight:500;line-height:1.65;margin-top:0}
+.fcard.open .f-expand{max-height:180px;opacity:1;margin-top:14px}
+.f-toggle{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:rgba(196,112,90,.1);color:var(--terracotta);font-size:1.1rem;margin-top:14px;transition:transform .3s;font-weight:400}
+.fcard.open .f-toggle{transform:rotate(45deg)}
+
+/* SOLUTION */
+.solution{background:var(--white)}
+.solution-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.sol-intro{font-size:.97rem;color:var(--mid);line-height:1.9;font-weight:300;margin:22px 0 34px}
+.sol-checks{display:flex;flex-direction:column;gap:14px}
+.sol-row{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:14px;background:var(--cream);border:1px solid var(--border);transition:all .3s}
+.sol-row:hover{border-color:var(--terracotta);background:var(--terra-pale);transform:translateX(6px)}
+.sol-tick{width:22px;height:22px;background:var(--terracotta);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--white);font-size:.65rem;margin-top:1px}
+.sol-copy{font-size:.9rem;color:var(--mid);line-height:1.65}
+.sol-copy strong{color:var(--ink)}
+.sol-cards{display:flex;flex-direction:column;gap:12px}
+.sol-card{background:var(--cream);border:1.5px solid var(--border);border-radius:16px;padding:22px;display:flex;gap:14px;align-items:center;transition:all .3s cubic-bezier(.34,1.56,.64,1);cursor:default}
+.sol-card:hover{border-color:var(--terracotta);transform:translateX(10px);box-shadow:0 8px 28px rgba(196,112,90,.1)}
+.sol-icon{width:44px;height:44px;border-radius:12px;background:rgba(196,112,90,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;transition:background .3s}
+.sol-card:hover .sol-icon{background:rgba(196,112,90,.18)}
+.sol-card-title{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.sol-card-sub{font-size:.75rem;color:var(--muted)}
+.sol-tag{margin-left:auto;font-family:'DM Mono',monospace;font-size:.57rem;color:var(--terracotta);background:rgba(196,112,90,.08);border:1px solid rgba(196,112,90,.2);padding:4px 10px;border-radius:50px;letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}
+
+/* PILLARS — Tab switcher */
+.pillars{background:var(--blush)}
+.pillars-head{text-align:center;margin-bottom:52px}
+.pillars-sub{font-size:.93rem;color:var(--muted);max-width:440px;margin:12px auto 0;line-height:1.85;font-weight:300}
+.tab-bar{display:flex;gap:8px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.tab{padding:11px 26px;border-radius:50px;font-size:.82rem;font-weight:600;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;transition:all .25s;user-select:none}
+.tab:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.tab.on{background:var(--terracotta);color:var(--white);border-color:var(--terracotta);box-shadow:0 6px 20px rgba(196,112,90,.3)}
+.tab-panels .panel{display:none;grid-template-columns:1fr 1fr;gap:52px;align-items:center;animation:fadeInUp .4s ease}
+.tab-panels .panel.on{display:grid}
+.panel-copy h3{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:700;margin-bottom:16px;line-height:1.1}
+.panel-copy p{font-size:.93rem;color:var(--mid);line-height:1.88;margin-bottom:24px;font-weight:300}
+.panel-outs{display:flex;flex-direction:column;gap:10px}
+.panel-out{display:flex;gap:10px;align-items:flex-start;font-size:.87rem;color:var(--mid)}
+.panel-out::before{content:'→';color:var(--terracotta);flex-shrink:0;margin-top:1px}
+.panel-vis{background:var(--white);border-radius:22px;padding:44px 36px;text-align:center;border:1.5px solid var(--border)}
+.vis-emoji{font-size:5rem;display:block;margin-bottom:20px;animation:bob 3s ease-in-out infinite}
+.vis-stat{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:700;color:var(--terracotta);line-height:1}
+.vis-stat-label{font-size:.8rem;color:var(--muted);margin-top:8px}
+
+/* WHO */
+.who{background:var(--white)}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:52px}
+.who-col{border-radius:22px;padding:44px 40px}
+.who-yes{background:linear-gradient(135deg,var(--terra-pale),var(--blush));border:1.5px solid rgba(196,112,90,.2)}
+.who-no{background:var(--cream);border:1.5px solid var(--border)}
+.who-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.who-yes .who-label{color:var(--terracotta)}
+.who-no .who-label{color:var(--muted)}
+.who-list{display:flex;flex-direction:column;gap:14px;list-style:none}
+.who-list li{display:flex;gap:12px;align-items:flex-start;font-size:.91rem;line-height:1.65;color:var(--mid)}
+.who-icon{flex-shrink:0;margin-top:2px}
+.who-yes .who-icon{color:var(--terracotta)}
+.who-no .who-icon{color:var(--border)}
+
+/* TESTIMONIALS — Carousel */
+.testi{background:var(--blush)}
+.testi-head{text-align:center;margin-bottom:52px}
+.carousel-wrap{overflow:hidden;position:relative}
+.carousel-track{display:flex;gap:20px;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.tcard{flex:0 0 calc(33.333% - 14px);background:var(--white);border:1.5px solid var(--border);border-radius:22px;padding:36px;transition:all .3s}
+.tcard:hover{border-color:var(--terracotta);box-shadow:0 16px 50px rgba(196,112,90,.1);transform:translateY(-5px)}
+.tc-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.57rem;color:var(--terracotta);background:rgba(196,112,90,.08);border:1px solid rgba(196,112,90,.2);padding:4px 12px;border-radius:50px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.tc-stars{color:var(--terracotta);font-size:.85rem;letter-spacing:3px;margin-bottom:16px}
+.tc-text{font-family:'Fraunces',serif;font-style:italic;font-size:1rem;line-height:1.78;color:var(--ink);margin-bottom:24px}
+.tc-div{height:1px;background:var(--border);margin-bottom:18px}
+.tc-auth{display:flex;align-items:center;gap:12px}
+.tc-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:var(--white);flex-shrink:0}
+.tc-name{font-weight:700;font-size:.88rem}
+.tc-role{font-size:.73rem;color:var(--muted);margin-top:2px}
+.car-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:32px}
+.car-btn{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);cursor:pointer;font-size:1rem;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.car-btn:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.car-dots{display:flex;gap:8px}
+.car-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .25s}
+.car-dot.on{background:var(--terracotta);width:22px;border-radius:4px}
+
+/* COMMUNITY / LIVE FEED */
+.community{background:var(--white)}
+.comm-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center}
+.comm-text h2{margin-bottom:20px}
+.comm-text p{font-size:.95rem;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
+.stat-tile{background:var(--cream);border:1px solid var(--border);border-radius:16px;padding:22px;transition:all .3s}
+.stat-tile:hover{border-color:var(--terracotta);transform:translateY(-4px);box-shadow:0 8px 24px rgba(196,112,90,.1)}
+.stat-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:700;color:var(--terracotta);line-height:1;margin-bottom:5px}
+.stat-lbl{font-size:.76rem;color:var(--muted)}
+.feed-box{background:var(--cream);border-radius:22px;overflow:hidden;border:1.5px solid var(--border);box-shadow:0 16px 50px rgba(44,31,26,.06)}
+.feed-topbar{padding:13px 18px;border-bottom:1px solid var(--border);background:var(--white);display:flex;align-items:center;gap:8px}
+.ftd{width:8px;height:8px;border-radius:50%}
+.ftd1{background:#fc8181}.ftd2{background:#f6c90e}.ftd3{background:#68d391}
+.feed-title-bar{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-left:auto}
+.live-badge{font-family:'DM Mono',monospace;font-size:.57rem;color:#48bb78;display:flex;align-items:center;gap:4px}
+.live-pip{width:6px;height:6px;border-radius:50%;background:#48bb78;animation:pulse 1.5s infinite}
+.feed-scroll{padding:6px 0;min-height:260px}
+.feed-entry{padding:12px 18px;display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid rgba(234,216,210,.4);transition:background .2s}
+.feed-entry:hover{background:rgba(196,112,90,.03)}
+.feed-entry:last-child{border-bottom:none}
+.fav{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:var(--white);flex-shrink:0}
+.fav1{background:#c4705a}.fav2{background:#c49a4a}.fav3{background:#7a9e7e}.fav4{background:#b87a6a}.fav5{background:#a08878}
+.feed-txt{font-size:.78rem;color:var(--mid);line-height:1.5}
+.feed-txt strong{color:var(--ink)}
+.feed-win{color:var(--terracotta);font-weight:600}
+.feed-time{font-family:'DM Mono',monospace;font-size:.57rem;color:var(--muted);margin-top:3px}
+
+/* CTA / PRICING */
+.cta-wrap{background:linear-gradient(140deg,#3a1f18 0%,#5c2d22 45%,#2d3a28 100%);padding:110px 56px;text-align:center;position:relative;overflow:hidden}
+.cta-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 30% 50%,rgba(196,112,90,.2) 0%,transparent 60%),radial-gradient(ellipse 55% 65% at 80% 50%,rgba(122,158,126,.12) 0%,transparent 60%)}
+.cta-eyebrow{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--terra-lt);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.cta-h{font-family:'Fraunces',serif;font-size:clamp(2.5rem,6vw,6rem);font-weight:700;color:var(--white);line-height:1;letter-spacing:-.02em;margin-bottom:20px}
+.cta-h em{font-style:italic;color:var(--terra-lt)}
+.cta-body{color:rgba(255,255,255,.45);font-size:1rem;max-width:460px;margin:0 auto 14px;line-height:1.9;font-weight:300}
+
+/* PRICING TOGGLE */
+.price-toggle{display:flex;background:rgba(255,255,255,.08);border-radius:50px;padding:4px;width:fit-content;margin:0 auto 44px;border:1px solid rgba(255,255,255,.1);position:relative;z-index:2}
+.ptog-btn{padding:10px 28px;border-radius:50px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .3s;color:rgba(255,255,255,.5);letter-spacing:.04em;user-select:none}
+.ptog-btn.on{background:var(--terracotta);color:var(--white);box-shadow:0 4px 16px rgba(196,112,90,.4)}
+
+.price-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;margin:0 auto;position:relative;z-index:2}
+.pcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:40px;text-align:left;backdrop-filter:blur(10px);transition:all .3s}
+.pcard:hover{border-color:rgba(196,112,90,.4);transform:translateY(-4px)}
+.pcard.featured{border-color:var(--terracotta);border-top-width:3px;background:rgba(196,112,90,.12)}
+.pcard-badge{display:inline-block;background:var(--terracotta);color:var(--white);font-family:'DM Mono',monospace;font-size:.58rem;padding:5px 14px;border-radius:50px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.pcard-plan{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.pcard-price{font-family:'Fraunces',serif;font-size:3.8rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:6px}
+.pcard-price .cur{font-size:2rem;vertical-align:top;margin-top:8px;display:inline-block;color:var(--terra-lt)}
+.pcard-note{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:6px}
+.pcard-instalment{background:rgba(196,112,90,.15);border:1px solid rgba(196,112,90,.3);border-radius:10px;padding:12px 16px;font-size:.82rem;color:rgba(255,255,255,.7);margin:16px 0 24px}
+.pcard-instalment strong{color:var(--terra-lt)}
+.pcard-divider{height:1px;background:rgba(255,255,255,.08);margin:20px 0}
+.pcard-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
+.pcard-list li{display:flex;gap:10px;align-items:flex-start;font-size:.87rem;color:rgba(255,255,255,.7);line-height:1.5}
+.pcard-list li::before{content:'✓';color:var(--terra-lt);font-weight:700;flex-shrink:0;margin-top:1px}
+.pcard-btn{display:block;text-align:center;padding:16px;font-weight:700;font-size:.9rem;text-decoration:none;border-radius:50px;transition:all .25s;letter-spacing:.04em}
+.pcard-btn.solid{background:var(--terracotta);color:var(--white);box-shadow:0 8px 24px rgba(196,112,90,.4)}
+.pcard-btn.solid:hover{background:var(--terra-lt);transform:translateY(-1px)}
+.pcard-btn.ghost{border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.pcard-btn.ghost:hover{border-color:rgba(196,112,90,.5);color:var(--terra-lt)}
+.pcard-secure{text-align:center;font-family:'DM Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.06em;margin-top:12px}
+
+/* FAQ */
+.faq-sec{background:var(--blush)}
+.faq-head{text-align:center;margin-bottom:52px}
+.faq-stack{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-tile{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .2s}
+.faq-tile:hover{border-color:rgba(196,112,90,.3)}
+.faq-tile.open{border-color:var(--terracotta)}
+.faq-q{padding:22px 28px;font-weight:700;font-size:.9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .2s;user-select:none}
+.faq-tile.open .faq-q{color:var(--terracotta)}
+.faq-plus{width:26px;height:26px;border-radius:50%;background:rgba(196,112,90,.1);color:var(--terracotta);font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s;font-weight:300}
+.faq-tile.open .faq-plus{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:.85rem;color:var(--muted);line-height:1.78;padding:0 28px}
+.faq-tile.open .faq-a{max-height:200px;padding:0 28px 22px}
+
+/* FOOTER */
+footer{background:var(--ink);padding:44px 56px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.foot-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--white)}
+.foot-logo span{color:var(--terra-lt);font-style:italic}
+.foot-nav{display:flex;gap:24px;list-style:none}
+.foot-nav a{font-size:.78rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.foot-nav a:hover{color:var(--terra-lt)}
+.foot-copy{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.04em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@keyframes drift{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.04)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* RESPONSIVE */
+@media(max-width:980px){
+  nav,nav.scrolled{padding:16px 22px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:112px 22px 70px;gap:44px}
+  .hero-right{height:280px}
+  .hcard.hc-c,.hcard.hc-d{display:none}
+  .hcard.hc-main{width:240px;top:20px;left:10px}
+  .hcard.hc-b{width:190px;top:10px;right:10px}
+  .section{padding:72px 22px}
+  .cta-wrap{padding:80px 22px}
+  footer{padding:36px 22px;flex-direction:column;align-items:flex-start}
+  .problem-grid,.solution-grid,.comm-grid{grid-template-columns:1fr;gap:40px}
+  .fear-grid{grid-template-columns:1fr}
+  .who-grid{grid-template-columns:1fr}
+  .tab-panels .panel.on{grid-template-columns:1fr}
+  .price-cards{grid-template-columns:1fr;max-width:400px}
+  .tcard{flex:0 0 100%}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curRing"></div>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="logo">Side Income <span>Society</span></div>
+  <ul class="nav-links">
+    <li><a href="#inside">Inside</a></li>
+    <li><a href="#who">Who It's For</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+  <a href="https://sideicomewealth.com/shop/d6e5a432-adac-4bc6-b1a8-72b73ac5c64c" class="nav-cta" target="_blank" rel="noopener">Join Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-circle hc1"></div>
+    <div class="hero-circle hc2"></div>
+    <div class="hero-circle hc3"></div>
+  </div>
+
+  <div class="hero-left">
+    <div class="hero-pill">
+      <span class="pill-dot"></span>
+      235 women already inside
+    </div>
+    <h1>She Decided<br>to Make <em>AI</em><br><span class="ghost">Work for Her.</span></h1>
+    <p class="hero-body">No tech degree. No coding background. No idea where to start.<br>Just a community built to show everyday women exactly how the AI economy works — and how to earn from it.</p>
+    <div class="hero-actions">
+      <a href="https://sideicomewealth.com/shop/d6e5a432-adac-4bc6-b1a8-72b73ac5c64c" class="btn-primary" target="_blank" rel="noopener">See What's Inside →</a>
+      <a href="#stories" class="btn-outline">Read their stories ↓</a>
+    </div>
+    <div class="social-proof">
+      <div class="s-avs">
+        <div class="s-av sa1">MK</div>
+        <div class="s-av sa2">AS</div>
+        <div class="s-av sa3">JL</div>
+        <div class="s-av sa4">TP</div>
+        <div class="s-av sa5">RN</div>
+      </div>
+      <div class="s-text">
+        <strong>235 members already building</strong>
+        teachers · mums · freelancers · 9–5 workers
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hcard hc-main" id="hcMain">
+      <div class="hcard-tag">Community Win 🎉</div>
+      <div class="hcard-title">First app launched in 4 days</div>
+      <div class="hcard-body">No code. No tech background. Just the process from inside the Society.</div>
+    </div>
+    <div class="hcard hc-b" id="hcB">
+      <div class="hcard-tag">Income Update</div>
+      <div class="hc-b-big">£500<span style="font-size:1.4rem">/mo</span></div>
+      <div class="hc-b-sub">AI services retainer · Month 2</div>
+    </div>
+    <div class="hcard hc-c" id="hcC">
+      <div class="hcard-tag">Content Win</div>
+      <div class="hcard-title">1,200 newsletter subscribers</div>
+      <div class="hcard-body">Built in 60 days with the AI content workflow.</div>
+    </div>
+    <div class="hcard hc-d" id="hcD">
+      <div class="hcard-tag" style="opacity:.6">This week</div>
+      <div class="hc-b-big" style="color:var(--ink)">£197</div>
+      <div class="hc-b-sub" style="color:var(--muted)">First digital product sales</div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave" style="background:var(--blush)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60" fill="white"><path d="M0,30 C480,60 960,0 1440,30 L1440,0 L0,0 Z"/></svg>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-inner">
+    <span class="m-item b">No Tech Experience Needed</span><span class="m-item">Build Apps with AI</span>
+    <span class="m-item b">AI Content Creation</span><span class="m-item">Monetise Your Skills</span>
+    <span class="m-item b">235 Members Strong</span><span class="m-item">Weekly Live Sessions</span>
+    <span class="m-item b">Real Income. Real Women.</span><span class="m-item">No Coding Required</span>
+    <span class="m-item b">No Tech Experience Needed</span><span class="m-item">Build Apps with AI</span>
+    <span class="m-item b">AI Content Creation</span><span class="m-item">Monetise Your Skills</span>
+    <span class="m-item b">235 Members Strong</span><span class="m-item">Weekly Live Sessions</span>
+    <span class="m-item b">Real Income. Real Women.</span><span class="m-item">No Coding Required</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section problem">
+  <div class="wrap">
+    <div class="problem-grid">
+      <div>
+        <div class="eyebrow reveal">// The Honest Reality</div>
+        <h2 class="reveal">AI is creating a new economy. Most women are watching from the <em>sidelines.</em></h2>
+        <div class="prob-list reveal">
+          <div class="prob-row">
+            <div class="prob-emoji">📰</div>
+            <div class="prob-copy"><strong>The headlines keep coming</strong> — AI is reshaping industries and creating new income streams. But nobody explains what it means for ordinary women who aren't in tech.</div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-emoji">🔒</div>
+            <div class="prob-copy"><strong>The tools exist.</strong> The opportunities are real. But without a community and a clear path, it feels impossible to know where to start — let alone get paid.</div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-emoji">⏳</div>
+            <div class="prob-copy"><strong>Every week that passes</strong> is a week where someone else — with no more talent or experience — is quietly building something that pays her every single month.</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="pullquote">
+          <p class="pq-body">"The women who thrive in the AI era won't necessarily be the most technical. They'll be the ones who found the right community and started — even when they weren't completely sure how."</p>
+          <div class="pq-source">— Pattern seen across 235+ community members</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEARS — Interactive -->
+<section class="section fears">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="text-align:center">// Sound Familiar?</div>
+    <h2 class="reveal" style="text-align:center;margin-bottom:14px">The three things keeping most women <em>stuck</em></h2>
+    <p class="fears-sub reveal">Tap each card — these are the exact beliefs that held back almost every member before they joined.</p>
+    <div class="fear-grid reveal">
+
+      <div class="fcard" onclick="toggleFear(this)">
+        <span class="f-emoji">🤯</span>
+        <div class="f-title">"I'm not technical enough"</div>
+        <div class="f-teaser">The assumption that AI is only for developers and people with CS degrees.</div>
+        <div class="f-expand">The most powerful AI tools require nothing more than curiosity and willingness to follow a process. Every single member inside felt exactly this way before they started — and got past it.</div>
+        <div class="f-toggle">+</div>
+      </div>
+
+      <div class="fcard" onclick="toggleFear(this)">
+        <span class="f-emoji">🌫️</span>
+        <div class="f-title">"I don't know where to start"</div>
+        <div class="f-teaser">Tutorials lead nowhere. Free content covers the surface and leaves out the part that makes money.</div>
+        <div class="f-expand">What most women are missing isn't information — it's a structured path and a community walking it alongside them. That's precisely what the Society provides from day one.</div>
+        <div class="f-toggle">+</div>
+      </div>
+
+      <div class="fcard" onclick="toggleFear(this)">
+        <span class="f-emoji">⏰</span>
+        <div class="f-title">"I don't have the time"</div>
+        <div class="f-teaser">Between work, family, and everything else — there never seems to be a good moment to start.</div>
+        <div class="f-expand">Most members work full-time and make meaningful progress in just 3–5 hours a week. The content is built for women with real, full lives — not for people with an entire day to dedicate to a side project.</div>
+        <div class="f-toggle">+</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section solution" id="inside">
+  <div class="wrap">
+    <div class="solution-grid">
+      <div>
+        <div class="eyebrow reveal">// The Solution</div>
+        <h2 class="reveal">A community built for women who want to <em>do something</em> with AI</h2>
+        <p class="sol-intro reveal">Side Income Society exists because there is a gap between knowing AI is an opportunity and actually turning it into income. The community closes that gap — with structured learning, real accountability, and women at every stage of the journey.</p>
+        <div class="sol-checks reveal">
+          <div class="sol-row">
+            <div class="sol-tick">✓</div>
+            <div class="sol-copy"><strong>Beginners find a clear starting point</strong> — no wandering through confusing tutorials alone.</div>
+          </div>
+          <div class="sol-row">
+            <div class="sol-tick">✓</div>
+            <div class="sol-copy"><strong>Members find real accountability</strong> — women sharing real wins and pushing each other forward every week.</div>
+          </div>
+          <div class="sol-row">
+            <div class="sol-tick">✓</div>
+            <div class="sol-copy"><strong>Everyone gets a proven framework</strong> — actual systems for building apps, creating content, and monetising both.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sol-cards reveal">
+        <div class="sol-card">
+          <div class="sol-icon">⚡</div>
+          <div><div class="sol-card-title">Build Apps with AI</div><div class="sol-card-sub">No coding. From idea to live product in days.</div></div>
+          <div class="sol-tag">Pillar 01</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-icon">🎨</div>
+          <div><div class="sol-card-title">AI Content Creation</div><div class="sol-card-sub">Build an audience. Create at scale. Get paid.</div></div>
+          <div class="sol-tag">Pillar 02</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-icon">💸</div>
+          <div><div class="sol-card-title">Monetisation Systems</div><div class="sol-card-sub">Turn skills into products, clients, and income.</div></div>
+          <div class="sol-tag">Pillar 03</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-icon">🤝</div>
+          <div><div class="sol-card-title">Live Community Access</div><div class="sol-card-sub">235 members. Weekly Q&As. Real support.</div></div>
+          <div class="sol-tag">Ongoing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS — Tab Switcher -->
+<section class="section pillars">
+  <div class="wrap">
+    <div class="pillars-head">
+      <div class="eyebrow reveal">// What Members Learn</div>
+      <h2 class="reveal">Three pillars. One destination.</h2>
+      <p class="pillars-sub reveal">Every piece of content connects back to one goal — helping members earn income from AI skills anyone can learn.</p>
+    </div>
+    <div class="tab-bar reveal">
+      <div class="tab on" onclick="switchTab(0)">⚡ Build Apps</div>
+      <div class="tab" onclick="switchTab(1)">🎨 Create Content</div>
+      <div class="tab" onclick="switchTab(2)">💸 Monetise</div>
+    </div>
+    <div class="tab-panels">
+      <div class="panel on" id="panel0">
+        <div class="panel-copy">
+          <h3>Building Apps with AI</h3>
+          <p>Members discover how to use AI tools like Cursor, Bolt, and Claude to build real web apps and digital products — without writing a single line of code. Products people can sell, licence, or use to attract clients.</p>
+          <div class="panel-outs">
+            <div class="panel-out">Launch a functional web app within the first month</div>
+            <div class="panel-out">Build SaaS tools and sell them or use them as lead magnets</div>
+            <div class="panel-out">Offer app-building as a paid service to local businesses</div>
+          </div>
+        </div>
+        <div class="panel-vis">
+          <span class="vis-emoji">⚡</span>
+          <div class="vis-stat">4 days</div>
+          <div class="vis-stat-label">Average time to first app launch inside the community</div>
+        </div>
+      </div>
+      <div class="panel" id="panel1">
+        <div class="panel-copy">
+          <h3>AI Content Creation</h3>
+          <p>Members learn to create content that builds authority and generates enquiries — at a pace that was impossible before AI. Newsletters, short-form video, social content — produced in hours, not weeks.</p>
+          <div class="panel-outs">
+            <div class="panel-out">Produce weeks of content in hours using AI workflows</div>
+            <div class="panel-out">Grow an engaged audience from zero</div>
+            <div class="panel-out">Turn content into consulting, products, or affiliate income</div>
+          </div>
+        </div>
+        <div class="panel-vis">
+          <span class="vis-emoji">🎨</span>
+          <div class="vis-stat">1,200</div>
+          <div class="vis-stat-label">Newsletter subscribers built by one member in 60 days</div>
+        </div>
+      </div>
+      <div class="panel" id="panel2">
+        <div class="panel-copy">
+          <h3>Monetisation Systems</h3>
+          <p>Skills without a way to get paid are hobbies. This pillar is dedicated entirely to converting what members learn into real income — selling digital products, finding clients, or building recurring revenue.</p>
+          <div class="panel-outs">
+            <div class="panel-out">Launch and sell a digital product within weeks</div>
+            <div class="panel-out">Land the first paying AI services client</div>
+            <div class="panel-out">Build income streams that run without constant attention</div>
+          </div>
+        </div>
+        <div class="panel-vis">
+          <span class="vis-emoji">💸</span>
+          <div class="vis-stat">+40%</div>
+          <div class="vis-stat-label">Revenue increase seen by members offering AI services</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="section who" id="who">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="text-align:center">// Is This for You?</div>
+    <h2 class="reveal" style="text-align:center">Built for everyday women.<br>Not <em>experts.</em></h2>
+    <div class="who-grid">
+      <div class="who-col who-yes reveal">
+        <div class="who-label">✦ This is for you if...</div>
+        <ul class="who-list">
+          <li><span class="who-icon">✦</span>The 9–5 feels like a ceiling and a side income sounds genuinely exciting</li>
+          <li><span class="who-icon">✦</span>AI feels interesting but overwhelming — a structured path would change everything</li>
+          <li><span class="who-icon">✦</span>There's a desire to build something of your own but no clear idea where to start</li>
+          <li><span class="who-icon">✦</span>A few spare hours a week exist and the aim is to make every one count</li>
+          <li><span class="who-icon">✦</span>Learning in a community of women feels far more motivating than going it alone</li>
+          <li><span class="who-icon">✦</span>The goal is real income — not just another certificate sitting on a shelf</li>
+        </ul>
+      </div>
+      <div class="who-col who-no reveal">
+        <div class="who-label">✕ This is not for you if...</div>
+        <ul class="who-list">
+          <li><span class="who-icon">✕</span>The expectation is overnight riches with zero consistent effort</li>
+          <li><span class="who-icon">✕</span>Advanced technical training is the goal — this is built for complete beginners</li>
+          <li><span class="who-icon">✕</span>Consuming content without acting on it is acceptable</li>
+          <li><span class="who-icon">✕</span>There's no genuine curiosity about how AI could change your financial picture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi" id="stories">
+  <div class="wrap">
+    <div class="testi-head">
+      <div class="eyebrow reveal">// Member Stories</div>
+      <h2 class="reveal">235 women. Dozens of <em>first wins.</em></h2>
+    </div>
+    <div class="carousel-wrap reveal">
+      <div class="carousel-track" id="carTrack">
+        <div class="tcard">
+          <div class="tc-badge">First £200 Earned</div>
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-text">"Before joining, the idea of building an app felt completely out of reach. Three weeks in, there was a working product live on the internet — and it made its first £200 that same month. No coding experience. Just the process."</p>
+          <div class="tc-div"></div>
+          <div class="tc-auth"><div class="tc-av" style="background:#c4705a">MK</div><div><div class="tc-name">Marcus K.</div><div class="tc-role">Former retail manager · App builder track</div></div></div>
+        </div>
+        <div class="tcard">
+          <div class="tc-badge">1,200 Subscribers</div>
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-text">"A newsletter with over 1,200 subscribers was built in 60 days — starting from nothing. The AI content workflows inside make it possible to produce genuinely good content in a fraction of the time. Life-changing."</p>
+          <div class="tc-div"></div>
+          <div class="tc-auth"><div class="tc-av" style="background:#7a9e7e">AS</div><div><div class="tc-name">Aisha S.</div><div class="tc-role">Full-time teacher · Content creation track</div></div></div>
+        </div>
+        <div class="tcard">
+          <div class="tc-badge">+40% Revenue</div>
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-text">"The monetisation frameworks showed exactly how to offer AI services to existing clients. Revenue jumped 40% in two months. The weekly live sessions and community accountability make all the difference."</p>
+          <div class="tc-div"></div>
+          <div class="tc-auth"><div class="tc-av" style="background:#c49a4a">JL</div><div><div class="tc-name">James L.</div><div class="tc-role">Freelancer · Monetisation track</div></div></div>
+        </div>
+        <div class="tcard">
+          <div class="tc-badge">First Client Signed</div>
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-text">"I was a complete sceptic. I thought AI income was only for people who already had a business. Within 6 weeks I had my first paying client for AI content services. The community completely changed my perspective."</p>
+          <div class="tc-div"></div>
+          <div class="tc-auth"><div class="tc-av" style="background:#b87a6a">TP</div><div><div class="tc-name">Tara P.</div><div class="tc-role">Stay-at-home mum · Content creation track</div></div></div>
+        </div>
+        <div class="tcard">
+          <div class="tc-badge">£500/mo Retainer</div>
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-text">"Two months in and there's a £500/month retainer client. I learned the skills inside this community. The weekly live sessions are where the magic happens — every question gets answered in real time."</p>
+          <div class="tc-div"></div>
+          <div class="tc-auth"><div class="tc-av" style="background:#a08878">RN</div><div><div class="tc-name">Raj N.</div><div class="tc-role">Office worker · All three tracks</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="car-controls reveal">
+      <button class="car-btn" onclick="carPrev()">←</button>
+      <div class="car-dots" id="carDots">
+        <div class="car-dot on" onclick="carGo(0)"></div>
+        <div class="car-dot" onclick="carGo(1)"></div>
+        <div class="car-dot" onclick="carGo(2)"></div>
+      </div>
+      <button class="car-btn" onclick="carNext()">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY FEED -->
+<section class="section community">
+  <div class="wrap">
+    <div class="comm-grid">
+      <div class="comm-text">
+        <div class="eyebrow reveal">// Inside the Community</div>
+        <h2 class="reveal">A room full of women <em>doing the work</em></h2>
+        <p class="reveal">The Society is not a course platform with a forgotten login. It is a live, active community where members post wins, ask questions, share what's working, and hold each other accountable every single week.</p>
+        <p class="reveal">Members range from complete beginners in week one to women who've already landed clients, launched products, and built real momentum — there's always someone a few steps ahead willing to show the way.</p>
+        <div class="stat-grid reveal">
+          <div class="stat-tile"><div class="stat-num">235</div><div class="stat-lbl">Active members inside</div></div>
+          <div class="stat-tile"><div class="stat-num">3</div><div class="stat-lbl">Core income pillars</div></div>
+          <div class="stat-tile"><div class="stat-num">Weekly</div><div class="stat-lbl">Live Q&A sessions</div></div>
+          <div class="stat-tile"><div class="stat-num">£0</div><div class="stat-lbl">Tech experience needed</div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="feed-box">
+          <div class="feed-topbar">
+            <div class="ftd ftd1"></div><div class="ftd ftd2"></div><div class="ftd ftd3"></div>
+            <div class="feed-title-bar">Community Feed</div>
+            <div class="live-badge"><span class="live-pip"></span>Live</div>
+          </div>
+          <div class="feed-scroll" id="feedEl">
+            <div class="feed-entry"><div class="fav fav1">MK</div><div><div class="feed-txt"><strong>Marcus K.</strong> — <span class="feed-win">First app sale 🎉 £47!</span></div><div class="feed-time">2 min ago</div></div></div>
+            <div class="feed-entry"><div class="fav fav2">AS</div><div><div class="feed-txt"><strong>Aisha S.</strong> — Newsletter crossed 1,200 subs using the Week 3 workflow</div><div class="feed-time">18 min ago</div></div></div>
+            <div class="feed-entry"><div class="fav fav3">JL</div><div><div class="feed-txt"><strong>James L.</strong> — <span class="feed-win">AI retainer signed. £500/month 🙌</span></div><div class="feed-time">1 hr ago</div></div></div>
+            <div class="feed-entry"><div class="fav fav4">TP</div><div><div class="feed-txt"><strong>Tara P.</strong> — Built and deployed first app in 4 days. Zero coding.</div><div class="feed-time">3 hrs ago</div></div></div>
+            <div class="feed-entry"><div class="fav fav5">RN</div><div><div class="feed-txt"><strong>Raj N.</strong> — <span class="feed-win">Digital product: 12 sales in first 48 hours 🎉</span></div><div class="feed-time">5 hrs ago</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / PRICING -->
+<section class="cta-wrap" id="join">
+  <div class="wrap-sm" style="position:relative;z-index:2">
+    <div class="cta-eyebrow reveal">// Ready to Join</div>
+    <h2 class="cta-h reveal">The seat is open.<br>The community is <em>waiting.</em></h2>
+    <p class="cta-body reveal">Hundreds of women — with no tech background and no prior experience — have already made the decision to be in the room where AI skills become income.</p>
+
+    <!-- PRICING TOGGLE -->
+    <div class="price-toggle reveal">
+      <div class="ptog-btn on" onclick="showPlan('full')">Pay in Full</div>
+      <div class="ptog-btn" onclick="showPlan('plan')">Pay in 3</div>
+    </div>
+
+    <!-- PRICE CARDS -->
+    <div class="price-cards reveal">
+      <!-- FULL PAY -->
+      <div class="pcard featured" id="pcFull">
+        <div class="pcard-badge">✦ Best Value</div>
+        <div class="pcard-plan">Pay in Full</div>
+        <div class="pcard-price"><span class="cur">£</span>250</div>
+        <div class="pcard-note">One single payment · Save vs instalments</div>
+        <div class="pcard-instalment">Pay once — <strong>own access forever.</strong> No recurring charges, ever.</div>
+        <div class="pcard-divider"></div>
+        <ul class="pcard-list">
+          <li>All 3 income pillars — full course library</li>
+          <li>Weekly live Q&A sessions</li>
+          <li>Private member community access</li>
+          <li>My full AI prompt library (200+ prompts)</li>
+          <li>All future content — included forever</li>
+          <li>Priority support access</li>
+        </ul>
+        <a href="https://sideicomewealth.com/shop/d6e5a432-adac-4bc6-b1a8-72b73ac5c64c" class="pcard-btn solid" target="_blank" rel="noopener">Join the Society — £250 →</a>
+        <div class="pcard-secure">🔒 Secure checkout · Instant access</div>
+      </div>
+
+      <!-- INSTALMENT -->
+      <div class="pcard" id="pcPlan" style="display:none">
+        <div class="pcard-plan">Payment Plan</div>
+        <div class="pcard-price"><span class="cur">£</span>89</div>
+        <div class="pcard-note">× 3 monthly payments</div>
+        <div class="pcard-instalment">Charged monthly over 3 months. <strong>Full access from day one.</strong></div>
+        <div class="pcard-divider"></div>
+        <ul class="pcard-list">
+          <li>Full access immediately on joining</li>
+          <li>All 3 income pillars included</li>
+          <li>Community + weekly live sessions</li>
+          <li>All future content updates</li>
+          <li>My full AI prompt library</li>
+        </ul>
+        <a href="https://sideicomewealth.com/shop/d6e5a432-adac-4bc6-b1a8-72b73ac5c64c" class="pcard-btn ghost" target="_blank" rel="noopener">Start with 3 × £89 →</a>
+        <div class="pcard-secure">First payment charged today</div>
+      </div>
+    </div>
+
+    <p class="reveal" style="font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.12em;text-transform:uppercase;margin-top:48px">· 235 members already inside · New content added weekly ·</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-sec">
+  <div class="wrap">
+    <div class="faq-head">
+      <div class="eyebrow reveal">// Questions</div>
+      <h2 class="reveal">Frequently asked</h2>
+    </div>
+    <div class="faq-stack reveal">
+      <div class="faq-tile open">
+        <div class="faq-q" onclick="toggleFaq(this)">Is any technical experience required? <span class="faq-plus">+</span></div>
+        <div class="faq-a">None at all. The community is built specifically for people without a tech background. The tools and methods taught are designed so that AI handles the complexity — members just need to follow the process.</div>
+      </div>
+      <div class="faq-tile">
+        <div class="faq-q" onclick="toggleFaq(this)">How does the 3-payment plan work? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Members are charged monthly over 3 months. Full access is granted from the moment of joining, regardless of which option is chosen. The instalment plan is there to make it accessible — not to limit the experience in any way.</div>
+      </div>
+      <div class="faq-tile">
+        <div class="faq-q" onclick="toggleFaq(this)">How much time is needed each week? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Most members work full-time and make meaningful progress in as little as 3–5 hours per week. Content is structured to fit around real lives — not require someone to give up their job to benefit from it.</div>
+      </div>
+      <div class="faq-tile">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there a refund policy? <span class="faq-plus">+</span></div>
+        <div class="faq-a">If the content isn't found to be genuinely valuable within 14 days, the team will work to make it right. The goal is for every member to feel their investment was clearly worth making.</div>
+      </div>
+      <div class="faq-tile">
+        <div class="faq-q" onclick="toggleFaq(this)">What does lifetime access mean? <span class="faq-plus">+</span></div>
+        <div class="faq-a">One payment. No recurring fees. Every new module, session recording, or resource added to the community in the future is included at no additional cost — ever.</div>
+      </div>
+      <div class="faq-tile">
+        <div class="faq-q" onclick="toggleFaq(this)">Which track should someone start with? <span class="faq-plus">+</span></div>
+        <div class="faq-a">The community onboarding process helps every new member identify the right starting point based on their goals and available time. Nobody gets dropped in without clear direction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Side Income <span>Society</span></div>
+  <ul class="foot-nav">
+    <li><a href="#inside">Inside</a></li>
+    <li><a href="#who">Who It's For</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#join">Join</a></li>
+    <li><a href="https://sideicomewealth.com/shop/d6e5a432-adac-4bc6-b1a8-72b73ac5c64c" target="_blank" rel="noopener">Get Access</a></li>
+  </ul>
+  <div class="foot-copy">© 2025 Side Income Society · All rights reserved</div>
+</footer>
+
+<script>
+// ── CUSTOM CURSOR ──
+const cur = document.getElementById('cur');
+const ring = document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.fcard,.sol-card,.stat-tile,.faq-q,.tab,.car-btn,.ptog-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='48px';ring.style.height='48px';ring.style.opacity='.3'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='38px';ring.style.height='38px';ring.style.opacity='.45'});
+});
+
+// ── SCROLL PROGRESS + NAV ──
+const prog = document.getElementById('progress');
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.body.scrollHeight-window.innerHeight;
+  prog.style.width=(s/h*100)+'%';
+  nav.classList.toggle('scrolled',s>60);
+});
+
+// ── SCROLL REVEAL ──
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+
+// ── FEAR CARDS ──
+function toggleFear(card){
+  const wasOpen=card.classList.contains('open');
+  document.querySelectorAll('.fcard').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen)card.classList.add('open');
+}
+
+// ── PILLAR TABS ──
+function switchTab(idx){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===idx));
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('on',i===idx));
+}
+
+// ── TESTIMONIAL CAROUSEL ──
+let carIdx=0;
+const carTrack=document.getElementById('carTrack');
+const carDots=document.getElementById('carDots');
+const totalCards=5;
+function getVisible(){return window.innerWidth<980?1:3}
+function updateCar(){
+  const vis=getVisible();
+  const max=totalCards-vis;
+  carIdx=Math.max(0,Math.min(carIdx,max));
+  const wrap=carTrack.parentElement;
+  const w=wrap.offsetWidth;
+  const cw=(w-(vis-1)*20)/vis;
+  carTrack.querySelectorAll('.tcard').forEach(c=>{c.style.flex=`0 0 ${cw}px`});
+  carTrack.style.transform=`translateX(-${carIdx*(cw+20)}px)`;
+  carDots.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('on',i===Math.min(carIdx,carDots.children.length-1)));
+}
+function carNext(){carIdx++;updateCar()}
+function carPrev(){carIdx--;updateCar()}
+function carGo(i){carIdx=i;updateCar()}
+window.addEventListener('resize',updateCar);
+setTimeout(updateCar,120);
+
+// ── PRICING TOGGLE ──
+function showPlan(plan){
+  const full=document.getElementById('pcFull');
+  const inst=document.getElementById('pcPlan');
+  const btns=document.querySelectorAll('.ptog-btn');
+  if(plan==='full'){
+    full.style.display='block';inst.style.display='none';
+    btns[0].classList.add('on');btns[1].classList.remove('on');
+  } else {
+    full.style.display='none';inst.style.display='block';
+    btns[1].classList.add('on');btns[0].classList.remove('on');
+  }
+}
+
+// ── FAQ ACCORDION ──
+function toggleFaq(el){
+  const tile=el.parentElement;
+  const wasOpen=tile.classList.contains('open');
+  document.querySelectorAll('.faq-tile').forEach(t=>t.classList.remove('open'));
+  if(!wasOpen)tile.classList.add('open');
+}
+
+// ── LIVE FEED ──
+const feedMsgs=[
+  {av:'fav1',init:'CW',name:'Claire W.',msg:'just joined the community 👋',time:'Just now'},
+  {av:'fav2',init:'MK',name:'Marcus K.',msg:'— <span class="feed-win">Second sale. £97. 🔥</span>',time:'3 min ago'},
+  {av:'fav3',init:'SR',name:'Sophie R.',msg:'— first app live in 6 days. Zero coding.',time:'12 min ago'},
+  {av:'fav4',init:'TP',name:'Tara P.',msg:'— <span class="feed-win">First newsletter client. £200/month.</span>',time:'30 min ago'},
+  {av:'fav5',init:'RN',name:'Raj N.',msg:'— digital product crossed £1,000 total 🎉',time:'48 min ago'},
+  {av:'fav1',init:'DM',name:'Diana M.',msg:'just joined 👋 Welcome!',time:'1 hr ago'},
+  {av:'fav2',init:'JL',name:'James L.',msg:'— <span class="feed-win">Retainer renewed for month 3.</span>',time:'2 hrs ago'},
+];
+let fi=0;
+const feedEl=document.getElementById('feedEl');
+setInterval(()=>{
+  fi=(fi+1)%feedMsgs.length;
+  const m=feedMsgs[fi];
+  const row=document.createElement('div');
+  row.className='feed-entry';
+  row.style.cssText='opacity:0;transition:opacity .5s ease';
+  row.innerHTML=`<div class="fav ${m.av}">${m.init}</div><div><div class="feed-txt"><strong>${m.name}</strong> ${m.msg}</div><div class="feed-time">${m.time}</div></div>`;
+  feedEl.insertBefore(row,feedEl.firstChild);
+  requestAnimationFrame(()=>row.style.opacity='1');
+  if(feedEl.children.length>5)feedEl.removeChild(feedEl.lastChild);
+},4500);
+
+// ── HERO CARD PARALLAX ──
+const heroSection=document.querySelector('.hero');
+if(heroSection){
+  heroSection.addEventListener('mousemove',e=>{
+    const r=heroSection.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    const cards=[
+      {el:document.getElementById('hcMain'),s:10,rot:-1.5},
+      {el:document.getElementById('hcB'),s:14,rot:2},
+      {el:document.getElementById('hcC'),s:8,rot:1},
+      {el:document.getElementById('hcD'),s:12,rot:-2},
+    ];
+    cards.forEach(({el,s,rot})=>{
+      if(el)el.style.transform=`translate(${x*s}px,${y*s}px) rotate(${rot}deg)`;
+    });
+  });
+  heroSection.addEventListener('mouseleave',()=>{
+    [{id:'hcMain',r:-1.5},{id:'hcB',r:2},{id:'hcC',r:1},{id:'hcD',r:-2}].forEach(({id,r})=>{
+      const el=document.getElementById(id);
+      if(el)el.style.transform=`rotate(${r}deg)`;
+    });
+  });
+}
+</script>
+</body>
+</html>
