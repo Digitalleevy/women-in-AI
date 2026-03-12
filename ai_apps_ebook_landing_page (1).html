@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your AI Apps — Step By Step Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --pink: #F472B6;
+  --hot: #EC4899;
+  --deep: #BE185D;
+  --dark: #0f0610;
+  --dark2: #1a0a12;
+  --dark3: #2d0a1e;
+  --gold: #F4C842;
+  --gold2: #e6b800;
+  --blush: #FDE8F4;
+  --white: #ffffff;
+  --muted: #c084a0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--hot);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--pink);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s;
+}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar {
+  background: linear-gradient(90deg, var(--deep), var(--hot), var(--gold), var(--hot), var(--deep));
+  background-size: 300% 100%;
+  animation: barShift 4s linear infinite;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+@keyframes barShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 20px 60px;
+  text-align: center;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(236,72,153,0.18) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 100% 100%, rgba(244,200,66,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 50% 50% at 0% 80%, rgba(190,24,93,0.12) 0%, transparent 60%);
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(236,72,153,0.15);
+  border: 1px solid rgba(236,72,153,0.4);
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+.badge-dot {
+  width: 7px; height: 7px;
+  background: var(--hot);
+  border-radius: 50%;
+  animation: pulse 1.5s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+.hero-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  animation: fadeUp 0.9s ease 0.1s both;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 96px);
+  line-height: 0.92;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  animation: fadeUp 1s ease 0.2s both;
+}
+.hero-title .line1 { color: var(--white); display: block; }
+.hero-title .line2 {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--pink);
+  display: block;
+}
+.hero-title .line3 {
+  background: linear-gradient(135deg, var(--gold), var(--hot), var(--gold));
+  background-size: 200% 200%;
+  animation: goldShift 3s ease infinite, fadeUp 1s ease 0.2s both;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+@keyframes goldShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 3vw, 26px);
+  color: var(--blush);
+  margin-bottom: 32px;
+  max-width: 600px;
+  line-height: 1.4;
+  animation: fadeUp 1s ease 0.35s both;
+}
+
+/* ── COUNTDOWN ── */
+.countdown-wrap {
+  animation: fadeUp 1s ease 0.45s both;
+  margin-bottom: 36px;
+}
+
+.countdown-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.countdown {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cd-box {
+  background: linear-gradient(135deg, var(--dark3), var(--dark2));
+  border: 1px solid rgba(244,114,182,0.3);
+  border-radius: 12px;
+  padding: 14px 20px;
+  min-width: 72px;
+  position: relative;
+  overflow: hidden;
+}
+.cd-box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+}
+.cd-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  color: var(--white);
+  line-height: 1;
+  display: block;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.cd-num.flip {
+  animation: flipNum 0.3s ease;
+}
+@keyframes flipNum {
+  0% { transform: translateY(-10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.cd-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.cd-sep {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--hot);
+  padding-bottom: 20px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+/* ── PRICE + CTA ── */
+.price-block {
+  animation: fadeUp 1s ease 0.55s both;
+  margin-bottom: 16px;
+}
+.price-was {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+.price-now {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.price-currency { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--gold); }
+.price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--gold); line-height: 1; }
+.price-save {
+  display: inline-block;
+  background: var(--hot);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--hot), var(--deep));
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 20px 52px;
+  border-radius: 60px;
+  border: none;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 0 40px rgba(236,72,153,0.5), 0 8px 32px rgba(0,0,0,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 1s ease 0.6s both;
+}
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cta-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 60px rgba(236,72,153,0.7), 0 16px 40px rgba(0,0,0,0.5); }
+.cta-btn:hover::before { opacity: 1; }
+.cta-btn:active { transform: translateY(0) scale(0.99); }
+
+.cta-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 12px;
+  letter-spacing: 0.5px;
+  animation: fadeUp 1s ease 0.7s both;
+}
+.cta-sub span { color: var(--gold); font-weight: 600; }
+
+/* Spots left */
+.spots-bar {
+  max-width: 320px;
+  margin: 16px auto 0;
+  animation: fadeUp 1s ease 0.75s both;
+}
+.spots-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.spots-text strong { color: var(--hot); }
+.spots-track {
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.spots-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--hot), var(--gold));
+  border-radius: 10px;
+  width: 73%;
+  animation: fillBar 2s ease 1.5s both;
+}
+@keyframes fillBar { from { width: 0%; } to { width: 73%; } }
+
+/* ── SOCIAL PROOF ── */
+.proof-strip {
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(244,114,182,0.1);
+  border-bottom: 1px solid rgba(244,114,182,0.1);
+  padding: 22px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.proof-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--gold);
+  line-height: 1;
+}
+.proof-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.proof-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(244,114,182,0.2);
+}
+
+/* ── WHAT YOU GET ── */
+.section {
+  padding: 90px 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.section-tag {
+  display: inline-block;
+  background: rgba(236,72,153,0.12);
+  border: 1px solid rgba(236,72,153,0.3);
+  color: var(--pink);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 6vw, 58px);
+  letter-spacing: 2px;
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.5;
+  margin-bottom: 50px;
+}
+
+/* ── STEPS GRID ── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
+
+.step-card {
+  background: linear-gradient(135deg, rgba(45,10,30,0.8), rgba(26,10,18,0.9));
+  border: 1px solid rgba(244,114,182,0.15);
+  border-radius: 20px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.step-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(236,72,153,0.4);
+  box-shadow: 0 20px 60px rgba(236,72,153,0.12);
+}
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--deep), var(--hot), var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.step-card:hover::before { opacity: 1; }
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  color: rgba(244,114,182,0.12);
+  position: absolute;
+  top: 10px; right: 20px;
+  line-height: 1;
+}
+.step-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--hot), var(--deep));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(236,72,153,0.3);
+}
+.step-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.step-bullets {
+  list-style: none;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.step-bullets li {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  padding-left: 16px;
+  position: relative;
+}
+.step-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--hot);
+  font-size: 11px;
+}
+
+/* ── PSYCHOLOGY / PAIN POINTS ── */
+.pain-section {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, transparent, rgba(26,10,18,0.6), transparent);
+}
+.pain-inner { max-width: 860px; margin: 0 auto; }
+.pain-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 40px;
+}
+@media (max-width: 640px) { .pain-grid { grid-template-columns: 1fr; } }
+.pain-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: background 0.3s;
+}
+.pain-card:hover { background: rgba(236,72,153,0.06); }
+.pain-x {
+  width: 28px; height: 28px;
+  background: rgba(236,72,153,0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hot);
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.pain-text {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+.pain-text strong { color: var(--white); }
+
+/* Solution */
+.solution-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+.solution-text { flex: 1; min-width: 260px; }
+.solution-text h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.solution-text p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.solution-checks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+.solution-checks li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+.check-icon {
+  width: 20px; height: 20px;
+  background: linear-gradient(135deg, var(--hot), var(--deep));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.solution-visual {
+  flex: 0 0 300px;
+  background: linear-gradient(135deg, var(--dark3), var(--dark2));
+  border: 1px solid rgba(244,114,182,0.2);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+}
+.solution-price-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  background: linear-gradient(135deg, var(--gold), var(--hot));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.solution-visual p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.solution-visual .one-time {
+  background: rgba(236,72,153,0.15);
+  color: var(--pink);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials {
+  padding: 80px 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+@media (max-width: 768px) { .testi-grid { grid-template-columns: 1fr; } }
+.testi-card {
+  background: linear-gradient(135deg, rgba(45,10,30,0.6), rgba(26,10,18,0.8));
+  border: 1px solid rgba(244,114,182,0.12);
+  border-radius: 18px;
+  padding: 26px;
+  position: relative;
+  transition: transform 0.3s;
+}
+.testi-card:hover { transform: translateY(-4px); }
+.testi-stars {
+  color: var(--gold);
+  font-size: 14px;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.testi-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hot), var(--deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+.testi-name { font-size: 12px; font-weight: 700; color: var(--white); }
+.testi-handle { font-size: 11px; color: var(--muted); }
+
+/* ── BONUSES ── */
+.bonuses {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, transparent, rgba(26,10,18,0.8), transparent);
+}
+.bonuses-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+.bonus-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+@media (max-width: 640px) { .bonus-cards { grid-template-columns: 1fr; } }
+.bonus-card {
+  background: linear-gradient(135deg, rgba(26,10,18,0.9), rgba(45,10,30,0.6));
+  border: 1px solid rgba(244,200,66,0.2);
+  border-radius: 18px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.bonus-card:hover { transform: translateY(-4px); box-shadow: 0 16px 50px rgba(244,200,66,0.1); }
+.bonus-icon { font-size: 36px; margin-bottom: 14px; }
+.bonus-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.bonus-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.bonus-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── FAQ ── */
+.faq-section {
+  padding: 80px 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(244,114,182,0.1);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 22px 0;
+  cursor: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--pink); }
+.faq-icon {
+  width: 26px; height: 26px;
+  border: 1.5px solid rgba(236,72,153,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink);
+  font-size: 16px;
+  font-weight: 300;
+  flex-shrink: 0;
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+  background: var(--hot);
+  border-color: var(--hot);
+  color: white;
+}
+.faq-a {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final-cta-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(236,72,153,0.12) 0%, transparent 70%);
+}
+.final-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 8vw, 72px);
+  letter-spacing: 3px;
+  line-height: 0.95;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.final-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 36px;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+.final-cta .countdown-wrap { position: relative; z-index: 1; }
+.final-cta .price-block { position: relative; z-index: 1; }
+.final-cta .cta-btn { position: relative; z-index: 1; }
+.guarantee {
+  margin-top: 28px;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.guarantee-icon {
+  font-size: 20px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark2);
+  border-top: 1px solid rgba(244,114,182,0.1);
+  padding: 30px 20px;
+  text-align: center;
+}
+footer p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.5px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sticky CTA bar */
+.sticky-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(15, 6, 16, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(244,114,182,0.2);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 90;
+  transform: translateY(100%);
+  transition: transform 0.5s ease;
+  flex-wrap: wrap;
+}
+.sticky-cta.show { transform: translateY(0); }
+.sticky-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold);
+}
+.sticky-label { font-size: 12px; color: var(--muted); }
+.sticky-btn {
+  background: linear-gradient(135deg, var(--hot), var(--deep));
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 50px;
+  border: none;
+  cursor: none;
+  box-shadow: 0 0 24px rgba(236,72,153,0.4);
+  transition: transform 0.2s;
+}
+.sticky-btn:hover { transform: scale(1.04); }
+
+/* Notification popup */
+.notif {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  background: var(--dark2);
+  border: 1px solid rgba(244,114,182,0.2);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--white);
+  z-index: 95;
+  transform: translateX(-120%);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 280px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+.notif.show { transform: translateX(0); }
+.notif-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hot), var(--deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.notif-text strong { color: var(--pink); display: block; }
+.notif-time { font-size: 10px; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  ✦ LIMITED TIME OFFER — $37 TODAY ONLY — PRICE GOES UP SOON ✦ INSTANT DIGITAL DOWNLOAD ✦
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <!-- Particles generated by JS -->
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    New for 2025 — No Coding Required
+  </div>
+
+  <p class="hero-eyebrow">The Ultimate Step-By-Step Ebook</p>
+
+  <h1 class="hero-title">
+    <span class="line1">Build Your</span>
+    <span class="line2">Own AI Apps</span>
+    <span class="line3">& Get Paid</span>
+  </h1>
+
+  <p class="hero-sub">
+    From zero to launched — using Google's free tools to create AI apps you can sell for real income, starting today.
+  </p>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-wrap">
+    <p class="countdown-label">⚡ Special price expires in</p>
+    <div class="countdown">
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-h">02</span></div>
+        <span class="cd-label">Hours</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-m">47</span></div>
+        <span class="cd-label">Mins</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-s">33</span></div>
+        <span class="cd-label">Secs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE -->
+  <div class="price-block">
+    <p class="price-was">Regular price: $97</p>
+    <div class="price-now">
+      <span class="price-currency">$</span>
+      <span class="price-amount">37</span>
+    </div>
+    <span class="price-save">YOU SAVE $60 TODAY</span>
+  </div>
+
+  <a href="https://buy.stripe.com/fZu8wH0NOeYD4agc2we3e03" target="_blank" class="cta-btn">
+    Yes! I Want Instant Access →
+  </a>
+  <p class="cta-sub">
+    <span>✓ Instant Download</span> &nbsp;&nbsp;
+    <span>✓ 400+ Templates Included</span> &nbsp;&nbsp;
+    <span>✓ No Tech Skills Needed</span>
+  </p>
+
+  <div class="spots-bar">
+    <div class="spots-text">
+      <span>Discount spots claimed</span>
+      <strong>73 of 100 taken</strong>
+    </div>
+    <div class="spots-track"><div class="spots-fill"></div></div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-item">
+    <span class="proof-num">2,400+</span>
+    <span class="proof-label">Copies Sold</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">4.9★</span>
+    <span class="proof-label">Average Rating</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">400+</span>
+    <span class="proof-label">App Templates</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">8,300</span>
+    <span class="proof-label">Done-For-You Prompts</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">$0</span>
+    <span class="proof-label">To Start Building</span>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section class="pain-section reveal">
+  <div class="pain-inner">
+    <div class="section-tag">Sound familiar?</div>
+    <h2 class="section-title">Are You Stuck Here?</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-x">✕</div>
+        <p class="pain-text"><strong>Watching everyone else</strong> build AI businesses while you don't know where to start</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-x">✕</div>
+        <p class="pain-text"><strong>Overwhelmed by tech</strong> — thinking you need to be a developer to make AI apps</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-x">✕</div>
+        <p class="pain-text"><strong>Wasting hours on YouTube</strong> watching tutorials that never actually show you how to sell</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-x">✕</div>
+        <p class="pain-text"><strong>Spending money on courses</strong> that give you theory but zero step-by-step execution</p>
+      </div>
+    </div>
+
+    <div class="solution-row">
+      <div class="solution-text">
+        <h3>This Ebook Changes Everything.</h3>
+        <p>In less than a weekend, you can have a fully branded AI app built, listed, and ready to sell — using completely free tools from Google. No code. No degree. No excuses.</p>
+        <ul class="solution-checks">
+          <li><span class="check-icon">✓</span> Full Google Cloud Console setup walkthrough</li>
+          <li><span class="check-icon">✓</span> Google AI Studio from scratch — step by step</li>
+          <li><span class="check-icon">✓</span> Build, brand & customize your AI app</li>
+          <li><span class="check-icon">✓</span> Pricing strategies that convert at $7–$197</li>
+          <li><span class="check-icon">✓</span> Marketing blueprints to scale to 6 figures</li>
+        </ul>
+      </div>
+      <div class="solution-visual">
+        <p style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">GET IT ALL FOR</p>
+        <div class="solution-price-big">$37</div>
+        <p>One-time payment. Instant access. Yours forever.</p>
+        <span class="one-time">ONE-TIME PURCHASE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="section reveal">
+  <div class="section-tag">Inside the Ebook</div>
+  <h2 class="section-title">10 Pages.<br>Everything You Need.</h2>
+  <p class="section-sub">A complete, no-fluff roadmap from "I have no idea what I'm doing" to "I just made a sale."</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <span class="step-num">01</span>
+      <div class="step-icon">☁️</div>
+      <h3 class="step-title">Setting Up Google Cloud Console</h3>
+      <p class="step-desc">Create your free project, enable the Gemini API, and generate your secure API key in under 20 minutes.</p>
+      <ul class="step-bullets">
+        <li>Free account setup with $300 credits</li>
+        <li>Project creation & API activation</li>
+        <li>Secure API key generation</li>
+      </ul>
+    </div>
+    <div class="step-card">
+      <span class="step-num">02</span>
+      <div class="step-icon">🤖</div>
+      <h3 class="step-title">Navigating Google AI Studio</h3>
+      <p class="step-desc">Master the free tool that lets you design, test and fine-tune your AI app's personality before going live.</p>
+      <ul class="step-bullets">
+        <li>Prompt types explained simply</li>
+        <li>Writing System Instructions that sell</li>
+        <li>Testing & refining your AI</li>
+      </ul>
+    </div>
+    <div class="step-card">
+      <span class="step-num">03</span>
+      <div class="step-icon">🔗</div>
+      <h3 class="step-title">Connecting Cloud to AI Studio</h3>
+      <p class="step-desc">Link your project to AI Studio, test your live connection, and export your app configuration ready for deployment.</p>
+      <ul class="step-bullets">
+        <li>Step-by-step linking walkthrough</li>
+        <li>Connection testing checklist</li>
+        <li>Export your app's code</li>
+      </ul>
+    </div>
+    <div class="step-card">
+      <span class="step-num">04</span>
+      <div class="step-icon">✨</div>
+      <h3 class="step-title">Build, Brand & Sell Your App</h3>
+      <p class="step-desc">Name your app, create its persona, set your price and launch with a marketing strategy that drives real sales.</p>
+      <ul class="step-bullets">
+        <li>Naming formulas that convert</li>
+        <li>3 proven pricing models</li>
+        <li>Platform & marketing blueprint</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials reveal">
+  <div class="section-tag">Real Results</div>
+  <h2 class="section-title">They Built. They Sold. They Scaled.</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I made my first $97 sale three days after reading this. The Google AI Studio section alone is worth 10x the price. So clear, so simple."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">J</div>
+        <div>
+          <p class="testi-name">Jasmine T.</p>
+          <p class="testi-handle">Beauty AI Creator</p>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I kept thinking I needed to learn to code. This ebook proved me completely wrong. Built my business coaching AI in a weekend."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">M</div>
+        <div>
+          <p class="testi-name">Marcus W.</p>
+          <p class="testi-handle">Business Coach Bot Seller</p>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The 400+ templates and prompts sealed the deal for me. I launched a bundle of 3 apps and made $340 my first week. This is real."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <p class="testi-name">Alexis R.</p>
+          <p class="testi-handle">AI App Bundle Creator</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUSES -->
+<section class="bonuses reveal">
+  <div class="bonuses-inner">
+    <div class="section-tag">Free Bonuses Included</div>
+    <h2 class="section-title">You Also Get All Of This</h2>
+    <p class="section-sub" style="margin:0 auto 10px;">Worth over $200 — included free when you grab the ebook today.</p>
+    <div class="bonus-cards">
+      <div class="bonus-card">
+        <div class="bonus-icon">📋</div>
+        <p class="bonus-value">VALUE: $97</p>
+        <p class="bonus-name">400+ AI App Templates</p>
+        <p class="bonus-desc">Ready-made app configurations across every niche — beauty, business, fitness, finance and more. Plug and play.</p>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-icon">✍️</div>
+        <p class="bonus-value">VALUE: $67</p>
+        <p class="bonus-name">8,300 Done-For-You Prompts</p>
+        <p class="bonus-desc">Pre-written AI prompts you can drop straight into Google AI Studio to power your apps instantly. Never start from blank.</p>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-icon">👑</div>
+        <p class="bonus-value">VALUE: $47</p>
+        <p class="bonus-name">Private Community Access</p>
+        <p class="bonus-desc">Join a growing group of AI app builders. Get support, share wins, find collaborators, and access daily prompt drops.</p>
+      </div>
+    </div>
+    <p style="margin-top:28px; font-size:14px; color:var(--muted);">
+      Total value: <span style="color:var(--white); font-weight:700; text-decoration:line-through;">$308</span>
+      &nbsp;&nbsp;→&nbsp;&nbsp;
+      <span style="color:var(--gold); font-family:'Bebas Neue'; font-size:24px;">GET IT ALL FOR $37</span>
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section reveal">
+  <div class="section-tag">Questions?</div>
+  <h2 class="section-title" style="margin-bottom:30px;">We've Got Answers</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Do I need coding experience?<span class="faq-icon">+</span></button>
+      <p class="faq-a">Absolutely not. This guide was written specifically for non-technical people. If you can type and follow instructions, you can build an AI app. Google AI Studio requires zero code to get started.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How much does it cost to use Google's AI tools?<span class="faq-icon">+</span></button>
+      <p class="faq-a">Google AI Studio is completely free to use. Google Cloud Console offers $300 in free credits for new users, which is more than enough to build, test and launch your first app without spending a cent.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How quickly can I build and sell my first app?<span class="faq-icon">+</span></button>
+      <p class="faq-a">Most readers have their first app built within a weekend. With the 400+ templates and 8,300 prompts included, you can have something launch-ready in as little as a few hours.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What format is the ebook in?<span class="faq-icon">+</span></button>
+      <p class="faq-a">The ebook is a beautifully designed, downloadable PDF. You get instant access the moment you purchase. Works on any device — phone, tablet, or computer.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is this price really going up?<span class="faq-icon">+</span></button>
+      <p class="faq-a">Yes. The $37 launch price is genuinely limited. Once the countdown hits zero, the price increases. This is our way of rewarding early action-takers. The timer is real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta reveal" id="buy">
+  <div class="final-cta-bg"></div>
+  <h2 class="final-title">Your AI App Empire<br><span style="color:var(--gold);">Starts Right Now.</span></h2>
+  <p class="final-sub">Every day you wait is a day someone else is selling the app you could have built. The tools are free. The guide is $37. The only thing missing is you.</p>
+
+  <div class="countdown-wrap">
+    <p class="countdown-label">⚡ This price disappears when the timer hits zero</p>
+    <div class="countdown">
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-h2">02</span></div>
+        <span class="cd-label">Hours</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-m2">47</span></div>
+        <span class="cd-label">Mins</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="cd-s2">33</span></div>
+        <span class="cd-label">Secs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="price-block" style="margin-top:24px;">
+    <p class="price-was">Regular price: $97</p>
+    <div class="price-now">
+      <span class="price-currency">$</span>
+      <span class="price-amount">37</span>
+    </div>
+    <span class="price-save">ONE-TIME • INSTANT DOWNLOAD • YOURS FOREVER</span>
+  </div>
+
+  <a href="https://buy.stripe.com/fZu8wH0NOeYD4agc2we3e03" target="_blank" class="cta-btn" style="font-size:17px; padding:22px 60px;">
+    Get Instant Access for $37 →
+  </a>
+
+  <div class="guarantee">
+    <span class="guarantee-icon">🔒</span>
+    Secure checkout &nbsp;|&nbsp; Instant digital delivery &nbsp;|&nbsp; 100% satisfaction guaranteed
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Step By Step Guide To Build Your AI Apps &nbsp;|&nbsp; All rights reserved &nbsp;|&nbsp; Digital product — no physical item will be shipped</p>
+</footer>
+
+<!-- STICKY CTA BAR -->
+<div class="sticky-cta" id="stickyCta">
+  <div>
+    <p class="sticky-label">Limited Launch Price</p>
+    <span class="sticky-price">$37</span>
+  </div>
+  <button class="sticky-btn" onclick="document.getElementById('buy').scrollIntoView({behavior:'smooth'})">
+    Get Instant Access →
+  </button>
+</div>
+
+<!-- SOCIAL PROOF NOTIFICATION -->
+<div class="notif" id="notif">
+  <div class="notif-avatar">🎉</div>
+  <div class="notif-text">
+    <strong id="notif-name">Keisha M.</strong>
+    just purchased the ebook
+    <p class="notif-time" id="notif-time">2 minutes ago</p>
+  </div>
+</div>
+
+<script>
+// ── Custom Cursor ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+document.querySelectorAll('a, button, .step-card, .testi-card, .bonus-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '20px'; cursor.style.height = '20px';
+    ring.style.width = '54px'; ring.style.height = '54px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '12px'; cursor.style.height = '12px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+// ── Particles ──
+const hero = document.querySelector('.hero');
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 6 + 2;
+  p.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    background:${Math.random()>0.5 ? '#EC4899' : '#F4C842'};
+    animation-duration:${Math.random()*8+6}s;
+    animation-delay:${Math.random()*8}s;
+  `;
+  hero.appendChild(p);
+}
+
+// ── Countdown Timer ──
+function getOrSetExpiry() {
+  const key = 'ai_ebook_expiry';
+  let expiry = localStorage.getItem(key);
+  if (!expiry) {
+    expiry = Date.now() + (2 * 3600 + 47 * 60 + 33) * 1000;
+    try { localStorage.setItem(key, expiry); } catch(e) {}
+  }
+  return parseInt(expiry);
+}
+
+const expiry = getOrSetExpiry();
+
+function updateCountdown() {
+  const remaining = Math.max(0, expiry - Date.now());
+  const h = Math.floor(remaining / 3600000);
+  const m = Math.floor((remaining % 3600000) / 60000);
+  const s = Math.floor((remaining % 60000) / 1000);
+  const fmt = n => String(n).padStart(2, '0');
+
+  const ids = [
+    ['cd-h', 'cd-m', 'cd-s'],
+    ['cd-h2', 'cd-m2', 'cd-s2']
+  ];
+  ids.forEach(([hid, mid, sid]) => {
+    const hEl = document.getElementById(hid);
+    const mEl = document.getElementById(mid);
+    const sEl = document.getElementById(sid);
+    if (hEl && hEl.textContent !== fmt(h)) { hEl.textContent = fmt(h); hEl.classList.add('flip'); setTimeout(()=>hEl.classList.remove('flip'),300); }
+    if (mEl && mEl.textContent !== fmt(m)) { mEl.textContent = fmt(m); mEl.classList.add('flip'); setTimeout(()=>mEl.classList.remove('flip'),300); }
+    if (sEl) { sEl.textContent = fmt(s); }
+  });
+
+  if (remaining > 0) setTimeout(updateCountdown, 1000);
+}
+updateCountdown();
+
+// ── Scroll Reveals ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// ── Sticky CTA bar ──
+const stickyCta = document.getElementById('stickyCta');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 600) stickyCta.classList.add('show');
+  else stickyCta.classList.remove('show');
+});
+
+// ── Social Proof Notifications ──
+const buyers = [
+  { name: 'Keisha M.', time: '2 minutes ago' },
+  { name: 'Brittany L.', time: 'just now' },
+  { name: 'Dominique P.', time: '5 minutes ago' },
+  { name: 'Tasha R.', time: '1 minute ago' },
+  { name: 'Aisha W.', time: '3 minutes ago' },
+  { name: 'Monique F.', time: 'just now' },
+  { name: 'Chanel V.', time: '7 minutes ago' },
+];
+const notif = document.getElementById('notif');
+const notifName = document.getElementById('notif-name');
+const notifTime = document.getElementById('notif-time');
+let buyerIdx = 0;
+
+function showNotif() {
+  const buyer = buyers[buyerIdx % buyers.length];
+  notifName.textContent = buyer.name;
+  notifTime.textContent = buyer.time;
+  notif.classList.add('show');
+  setTimeout(() => notif.classList.remove('show'), 4000);
+  buyerIdx++;
+}
+setTimeout(() => { showNotif(); setInterval(showNotif, 12000); }, 5000);
+
+// ── FAQ Accordion ──
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
